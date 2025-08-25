@@ -7,7 +7,6 @@
 
 body {
   background: #000000;
-
   color: #fff;
 }
 #header {
@@ -32,10 +31,18 @@ nav {
   /* background-color: blue; */
 }
 
-.logo {
-  width: 7rem;
+.logo_p p {
+  font-size: 3rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+.logo_p p:hover {
+  cursor: pointer;
 }
 
+.logo_p span {
+  color: #ff004f;
+}
 nav ul li {
   display: inline-block;
   list-style: none;
@@ -120,7 +127,7 @@ nav ul li a:hover::after {
 
 .tab_links {
   margin-right: 3.25rem;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -179,14 +186,14 @@ nav ul li a:hover::after {
 .services_list div {
   background-color: #262626;
   padding: 2.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 300;
   border-radius: 0.75rem;
   transition: background-color 0.5s, transform 0.5s;
 }
 
 .services_list div i {
-  font-size: 2.75rem;
+  font-size: 2.5rem;
   margin-bottom: 1.75rem;
 }
 
@@ -199,11 +206,16 @@ nav ul li a:hover::after {
 .services_list div a {
   text-decoration: none;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-top: 1rem;
   display: inline-block;
 }
 
+.services_list div a:hover {
+  text-decoration: underline white;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px; /* thicker underline */
+}
 .services_list div:hover {
   background-color: #ff004f;
   transform: translateY(-10px);
@@ -369,6 +381,12 @@ form textarea {
   color: #fff;
   font-size: 1rem;
   border-radius: 0.5rem;
+}
+
+form input:focus,
+form textarea:focus {
+  border: 1px solid #ff004f;
+  box-shadow: 0 0 0 2px #ff004f;
 }
 
 form .btn.btn_more {
