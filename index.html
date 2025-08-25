@@ -4,9 +4,174 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio Website</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Hello world!</h1>
+    <div id="header">
+      <div class="container">
+        <nav>
+          <img src="images/icon.png" alt="logo" class="logo" />
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header_text">
+          <p>UI/UX Designer</p>
+          <h1>
+            Hi, I'm Sohaib Hasan<br />
+            <span> Niloy</span>
+            From Bangladesh
+          </h1>
+        </div>
+      </div>
+    </div>
+    <!-- About section  -->
+    <div id="about">
+      <div class="container">
+        <div class="row">
+          <div class="about-col-1">
+            <img src="images/user.png" alt="user photo" />
+          </div>
+          <div class="about-col-2">
+            <h1 class="sub_title">About Me</h1>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam
+              assumenda nisi recusandae provident consectetur quaerat, labore
+              nemo minus dolorum qui ab culpa quisquam, nesciunt aspernatur
+              enim, debitis rerum in! Vitae!
+            </p>
+            <div class="tab_titles">
+              <p class="tab_links active_link" onclick="opentab('skills')">
+                Skills
+              </p>
+              <p class="tab_links" onclick="opentab('experience')">
+                Experience
+              </p>
+              <p class="tab_links" onclick="opentab('education')">Education</p>
+            </div>
+
+            <div class="tab_contents active_tab" id="skills">
+              <ul>
+                <li><span>UI/UX</span><br />Designing Web/App interface</li>
+                <li>
+                  <span>Web Development</span><br />Web application Development
+                </li>
+                <li></li>
+                <li>
+                  <span>App Development</span><br />Building Android/ios apps
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab_contents" id="experience">
+              <ul>
+                <li>
+                  <span>2021 - Current</span><br />Full Stack MERN Developer
+                </li>
+                <li><span>2019-2021</span><br />Team Lead at StartApp LLC.</li>
+                <li></li>
+                <li>
+                  <span>2017-2016</span><br />
+                  UI/UX Design Executive at Coin Digital Ltd.
+                </li>
+                <li>
+                  <span>2016-2017</span><br />
+                  Internship at ekart eCommerce.
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab_contents" id="education">
+              <ul>
+                <li>
+                  <span>2027</span><br />B.Sc. in CSE, Khulna University of
+                  Engineering & Technology (KUET)
+                </li>
+                <li>
+                  <span>2021</span><br />HSC, Dr. Mahbubur Rahman Mollah
+                  College(DMRC)
+                </li>
+                <li></li>
+                <li>
+                  <span>2019</span><br />
+                  SSC, IET Govt. High School
+                </li>
+                <li>
+                  <span>2016-2017</span><br />
+                  Internship at ekart eCommerce.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- services  -->
+
+    <div id="services">
+      <div class="container">
+        <h1 class="sub_title">My Services</h1>
+        <div class="services_list">
+          <div>
+            <h2>Web Design</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos assumenda laudantium facere tempora hic dicta ea?
+              Facere, quidem labore. Excepturi modi minima incidunt nemo dolore
+              ullam possimus ipsum facere quia!
+            </p>
+            <a href="#">Learn nore</a>
+          </div>
+
+          <div>
+            <h2>App Design</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos assumenda laudantium facere tempora hic dicta ea?
+              Facere, quidem labore. Excepturi modi minima incidunt nemo dolore
+              ullam possimus ipsum facere quia!
+            </p>
+            <a href="#">Learn nore</a>
+          </div>
+
+          <div>
+            <h2>UI/UX Design</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos assumenda laudantium facere tempora hic dicta ea?
+              Facere, quidem labore. Excepturi modi minima incidunt nemo dolore
+              ullam possimus ipsum facere quia!
+            </p>
+            <a href="#">Learn nore</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var tab_links = document.getElementsByClassName("tab_links");
+      var tab_contents = document.getElementsByClassName("tab_contents");
+
+      function opentab(tab_name) {
+        for (tab_link of tab_links) {
+          tab_link.classList.remove("active_link");
+        }
+        for (tab_content of tab_contents) {
+          tab_content.classList.remove("active_tab");
+        }
+        event.currentTarget.classList.add("active_link");
+        document.getElementById(tab_name).classList.add("active_tab");
+      }
+    </script>
   </body>
 </html>
