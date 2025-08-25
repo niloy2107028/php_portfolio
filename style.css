@@ -16,10 +16,11 @@ body {
   background-image: url("images/pc_new.png");
   background-size: cover;
   background-position: right;
+  padding-top: 0px;
 }
 
 .container {
-  padding: 0px 10%;
+  padding: 0 10% 1rem;
   /* background-color: red; */
 }
 
@@ -167,6 +168,225 @@ nav ul li a:hover::after {
 .services_list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  /* Makes a responsive grid where
+    Each column is at least 15rem wide.
+    Columns can grow to fill space (1fr).
+    The grid auto-fits as many columns as possible in the container. */
   grid-gap: 2.5rem;
   margin-top: 3rem;
+}
+
+.services_list div {
+  background-color: #262626;
+  padding: 2.5rem;
+  font-size: 0.9rem;
+  font-weight: 300;
+  border-radius: 0.75rem;
+  transition: background-color 0.5s, transform 0.5s;
+}
+
+.services_list div i {
+  font-size: 2.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.services_list div h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.services_list div a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+.services_list div:hover {
+  background-color: #ff004f;
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+
+/* ------------ Portfolio section  --------- */
+
+#portfolio {
+  pad: 3rem 0;
+}
+
+.work_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 2.5rem;
+  margin: 3rem 0;
+}
+
+.work {
+  border-radius: 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.work img {
+  width: 100%;
+  border-radius: 0.75rem;
+  display: block;
+  transition: transform 0.5s;
+}
+
+.layer {
+  width: 100%;
+  height: 0;
+  /* initially hidden */
+  background: linear-gradient(rgba(0, 0, 0, 0.6), #ff004f);
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  /* from bottom to top transition */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 2.5rem;
+  text-align: center;
+  font-size: 1rem;
+  transition: height 0.5s;
+}
+
+.layer h3 {
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  /* color: green; */
+}
+
+.layer a {
+  margin-top: 1.25rem;
+  color: #ff004f;
+  /* border: 1px solid white;
+   */
+  text-decoration: none;
+  font-size: 1.25rem;
+  background: white;
+  line-height: 3.5rem;
+  /* height width centereds */
+  height: 3.5rem;
+  width: 3.75rem;
+  border-radius: 50%;
+  /* circle  */
+  text-align: center;
+}
+
+.work:hover img {
+  transform: scale(1.5);
+}
+
+.work:hover .layer {
+  height: 100%;
+}
+
+.btn {
+  /* background-color: white; */
+  display: block;
+  /* same line nothing will come  */
+  margin: 3rem auto;
+  /* centered using margin  */
+  width: fit-content;
+  border: 1px solid #ff004f;
+  padding: 1rem 3rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.5s;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ff004f;
+}
+
+/* ------------contact-------------- */
+
+.contact-left {
+  /* background-color: green; */
+  flex-basis: 35%;
+}
+
+.contact-left p {
+  margin-top: 1.75rem;
+}
+
+.contact-left p i {
+  color: #ff004f;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.social_icons {
+  margin-top: 2rem;
+}
+
+.social_icons a {
+  text-decoration: none;
+  font-size: 1.75rem;
+  margin-right: 1rem;
+  color: #ababab;
+  display: inline-block;
+  transition: transform 0.5s;
+}
+
+.social_icons a:hover {
+  color: #ff004f;
+  transform: translateY(-5px);
+}
+
+.btn.btn_more {
+  display: inline-block;
+  /* move on the start same line nothing else*/
+  background-color: #ff004f;
+}
+.contact-right {
+  /* background-color: blue; */
+  flex-basis: 60%;
+}
+
+.contact-right form {
+  width: 100%;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: #262626;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+}
+
+form .btn.btn_more {
+  padding: 1rem 4rem;
+  margin-top: 1rem;
+}
+
+/* --------copyright-------  */
+
+.copyright {
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #262626;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+.copyright i {
+  color: #ff004f;
 }
