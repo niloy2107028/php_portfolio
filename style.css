@@ -61,6 +61,7 @@ nav {
 .logo_p span {
   color: var(--primary-color);
 }
+
 nav ul li {
   display: inline-block;
   list-style: none;
@@ -78,7 +79,7 @@ nav ul li a {
 nav ul li a::after {
   content: "";
   width: 0;
-  height: 3px;
+  height: 4px;
   background: var(--primary-color);
   /* background: #003bfc; */
 
@@ -538,23 +539,18 @@ nav .fa-solid {
 
   nav ul {
     background: var(--primary-color);
-    position: fixed;
-    /* fixed on the screen  make a scroll to understand pos realted to initial block body */
+    position: fixed; /* fixed on the screen make a scroll to understand pos realted to initial block body */
     top: 0;
     right: 0;
     width: 12.5rem;
-    right: -12.5rem;
-    /* better transition after using the same width  */
+    right: -12.5rem; /* better transition after using the same width */
     height: 100vh;
     padding-top: 3rem;
-    z-index: 2;
-    /* safety */
+    z-index: 2; /* safety */
     transition: right 0.3s;
   }
-
   nav ul li {
-    display: block;
-    /* take full width  */
+    display: block; /* take full width */
     margin: 1.5rem;
   }
 
