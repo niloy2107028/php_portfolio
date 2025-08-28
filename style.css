@@ -95,15 +95,104 @@ nav ul li a:hover::after {
 
 .header_text {
   margin-top: 10%;
-  font-size: 2.25rem;
   font-size: 3.25rem;
+  /* background-color: #25d366; */
   /* background-color: green; */
 }
 
 .header_text h1 {
-  margin-top: 1.25rem;
+  margin: 1rem 0;
   font-size: 4rem;
-  font-weight: 600;
+}
+.header_text ol {
+  list-style: none;
+  --height: 4rem;
+  font-weight: 500;
+
+  height: var(--height);
+  line-height: var(--height);
+
+  overflow: hidden;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+.header_text ol li {
+  display: inline-block;
+  height: var(--height);
+  line-height: var(--height);
+  animation: slide calc(6 * 4 * 2s) steps(6) infinite;
+}
+
+@keyframes slide {
+  100% {
+    transform: translateY(calc(-6 * var(--height)));
+  }
+}
+
+.header_text ol li span {
+  white-space: nowrap;
+
+  /* cursor  */
+  border-right: 0.5rem solid #fff;
+
+  /* blink effect on cursor  */
+  animation: cursor 0.8s step-end infinite,
+    typing 4s steps(18) infinite alternate;
+
+  /* typing name of the keyframes it should use.
+
+  3s  total duration of the animation = 3 seconds.
+
+  steps(18)  instead of animating smoothly, it will jump in 18  discrete steps (looks like typing letter by letter).
+
+  infinite  repeats forever.
+
+  alternate  runs forward (typing) and then backward (deleting). */
+
+  /* alternate means 0 to 100 and also 100 to 0 */
+
+  /* display: inline-block; */
+  /*for width 0 to 100  */
+  /* overflow: hidden;
+  width: 0%; */
+
+  display: inline-flex;
+  /* keep cursor aligned */
+  align-items: center;
+  /* prevent vertical jump */
+  box-sizing: border-box; /* cursor won’t expand height */
+  overflow: hidden;
+  width: 0%;
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+    /* 50% time of 0.8 sec it will invisible  */
+  }
+}
+
+@keyframes typing {
+  0%,
+  20% {
+    width: 0%;
+  }
+
+  /* 0 to 20% percent time it will remains hidden */
+  /* 20 to 60% percent time will be used for typing . it expands from 0% → 102%*/
+  /* 60 to 100% percent time it remains visible */
+
+  60%,
+  100% {
+    width: 102%;
+  }
+}
+
+.header_text h1.location {
+  font-size: 3rem;
 }
 
 .header_text h1 span {
@@ -512,12 +601,19 @@ nav .fa-solid {
   }
 
   .header_text {
-    margin-top: 60%;
+    margin-top: 70%;
     font-size: 1.5rem;
+  }
+
+  .header_text h1.location {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    font-weight: 500;
   }
 
   .header_text h1 {
     font-size: 1.75rem;
+    margin: 0.5rem 0;
   }
   .container {
     padding: 0.5rem 5% 0.5rem;
@@ -719,5 +815,20 @@ nav .fa-solid {
     padding: 0.5rem 2rem;
     display: block;
     margin: 1 auto 0;
+  }
+
+  /* ------------------typing in mobile--------------- */
+
+  .header_text ol {
+    /* margin: 0.25rem 0; */
+    --height: 2.25rem;
+    font-weight: 500;
+
+    height: var(--height);
+    line-height: var(--height);
+  }
+
+  .header_text ol li span {
+    border-right: 0.25rem solid #fff;
   }
 }
