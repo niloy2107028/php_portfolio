@@ -1,3 +1,14 @@
+<?php
+// db_connect.php (or at the top of your HTML file)
+$servername = "localhost"; 
+$username = "root"; 
+$password = "";     
+$dbname = "portfolio";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,12 +50,21 @@
             <span> Niloy</span>
           </h1>
           <ol>
-            <li><span>Full-Stack Web Developer</span></li>
-            <li><span>MERN Stack Developer</span></li>
-            <li><span>PHP Developer</span></li>
-            <li><span>Application Developer</span></li>
-            <li><span>Competitive Programmer</span></li>
-            <li><span>Java Developer</span></li>
+            <?php
+            // Fetch skills
+            $result = $conn->query("SELECT skill_name FROM skills");
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<li><span>' . htmlspecialchars($row['skill_name']) . '</span></li>';
+
+                    // Using htmlspecialchars($row['skill_name']) ensures that if someone accidentally or maliciously adds HTML or JS in the skill_name, it will display as plain text and not break your page or run scripts.
+                }
+            } else {
+                echo '<li>No skills found</li>';
+            }
+
+            $conn->close();
+            ?>
           </ol>
           <h1 class="location">based in Bangladesh</h1>
         </div>
