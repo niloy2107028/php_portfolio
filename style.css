@@ -247,7 +247,7 @@ nav ul li a:hover::after {
 
 .tab_links {
   margin-right: 3.25rem;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 500;
   /* color: red; */
   cursor: pointer;
@@ -276,12 +276,12 @@ nav ul li a:hover::after {
 
 .tab_contents ul li span {
   color: var(--secondary-color);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
 .tab_contents ul li {
   /* color: var(--primary-color); */
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .tab_contents {
@@ -707,7 +707,7 @@ nav .fa-solid {
 
   .tab_contents ul li {
     /* color: var(--primary-color); */
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
   .services_list {
     margin-top: 1rem;

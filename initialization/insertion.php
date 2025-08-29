@@ -26,12 +26,12 @@ function executeQuery($conn, $sql) {
 
 // Insert into skills
 $sql = "INSERT INTO skills (skill_name, skill_des) VALUES
-('Full-Stack Web Developer', 'Builds complete websites from frontend to backend'),
-('MERN Stack Developer', 'Develops web apps using MongoDB, Express, React, Node'),
-('PHP Developer', 'Creates dynamic server-side applications using PHP'),
-('Application Developer', 'Designs and builds mobile or desktop applications'),
-('Competitive Programmer', 'Solves algorithmic problems with efficient coding skills'),
-('Java Developer', 'Develops robust applications using Java programming language')";
+('A Full-Stack Web Developer', 'Builds complete websites from frontend to backend'),
+('A MERN Stack Developer', 'Develops web apps using MongoDB, Express, React, Node'),
+('A PHP Developer', 'Creates dynamic server-side applications using PHP'),
+('An Application Developer', 'Designs and builds mobile or desktop applications'),
+('A Competitive Programmer', 'Solves algorithmic problems with efficient coding skills'),
+('A Java Developer', 'Develops robust applications using Java programming language')";
 executeQuery($conn, $sql);
 
 // Insert into about
