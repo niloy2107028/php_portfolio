@@ -63,7 +63,7 @@ if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
                 echo '<li>No skills found</li>';
             }
 
-            $conn->close();
+            // $conn->close();
             ?>
           </ol>
           <h1 class="location">based in Bangladesh</h1>
@@ -79,12 +79,11 @@ if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
           </div>
           <div class="about-col-2">
             <h1 class="sub_title">About Me</h1>
-            <p class="me">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam
-              assumenda nisi recusandae provident consectetur quaerat, labore
-              nemo minus dolorum qui ab culpa quisquam, nesciunt aspernatur
-              enim, debitis rerum in! Vitae!
-            </p>
+            <?php
+            // Fetch skills
+            $result = $conn->query("SELECT bio FROM about"); 
+                    echo '<p class="me">' . htmlspecialchars($result->fetch_assoc()['bio']) . '</p>';
+            ?>
             <div class="tab_titles">
               <p class="tab_links active_link" onclick="opentab('skills')">
                 Skills
