@@ -1,5 +1,5 @@
 <?php
-// db_connect.php (or at the top of your HTML file)
+// db_connect.php
 $servername = "localhost"; 
 $username = "root"; 
 $password = "";     
@@ -9,74 +9,69 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// Function to fetch all rows from a table
+function fetchRows($conn, $table) {
+    $rows = [];
+    $sql = "SELECT name FROM $table";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row['name'];
+        }
+    }
+    return $rows;
+}
 ?>
 
+<div id="services">
+    <div class="container">
+        <h1 class="sub_title">My Services</h1>
+        <div class="services_list">
 
+            <?php
+            $tables = [
+                "pl" => "Programming Languages",
+                "wd" => "Web Development",
+                "ad" => "App Development",
+                "tt" => "Tools & Technologies",
+                "ot" => "Other Skills"
+            ];
 
+            // A PHP associative array where i am string the names of the table index as a db table name 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+            foreach ($tables as $table => $title) {
+                $items = fetchRows($conn, $table);
+                echo '<div>';
+                echo '<h2>' . htmlspecialchars($title) . '</h2>';
+                if (!empty($items)) {
+                    echo '<ul>';
+                    foreach ($items as $item) {
+                        echo '<li>' . htmlspecialchars($item) . '</li>';
+                    }
+                    echo '</ul>';
+                } else {
+                    echo '<p>No items found</p>';
+                }
+                echo '</div>';
+            }
+            ?>
 
-    <style>
-.skills_grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.skill_card {
-  background-color: #262626;
-  padding: 2rem;
-  border-radius: 0.75rem;
-  font-size: 1.25rem;
-  font-weight: 300;
-  transition: background 0.5s, transform 0.5s;
-}
-
-.skill_card h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.skill_card p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #ccc;
-}
-
-.skill_card:hover {
-  background: linear-gradient(135deg, #6050dc, #3a0ca3);
-  transform: translateY(-10px);
-  cursor: pointer;
-}
-
-
-    </style>
-</head>
-<body>
-<div class="skills_grid">
-  <?php
-  $sql = "SELECT skill_name, skill_des FROM skills";
-  $result = $conn->query($sql);
-
-  if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-          echo '<div class="skill_card">';
-          echo '<h2>' . htmlspecialchars($row['skill_name']) . '</h2>';
-          echo '<p>' . htmlspecialchars($row['skill_des']) . '</p>';
-          echo '</div>';
-      }
-  } else {
-      echo '<p>No skills found</p>';
-  }
-  ?>
+        </div>
+    </div>
 </div>
 
-</body>
-</html>
+<style>
+/* Add UL/LI styles without changing existing card style */
+.services_list div ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.services_list div ul li {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+</style>

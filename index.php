@@ -152,43 +152,53 @@ if ($conn->connect_error) {
 
   <!-- services  -->
 
+<?php
+
+// Function to fetch all rows from a table
+function fetchRows($conn, $table) {
+    $rows = [];
+    $sql = "SELECT name FROM $table";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row['name'];
+        }
+    }
+    return $rows;
+}
+?>
+
+
+
   <div id="services">
     <div class="container">
       <h1 class="sub_title">My Services</h1>
       <div class="services_list">
-        <div>
-          <i class="fa-solid fa-code"></i>
-          <h2>Web Design</h2>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Dignissimos assumenda laudantium facere tempora hic dicta ea?
-            Facere, quidem labore. Excepturi modi minima incidunt nemo dolore
-            ullam possimus ipsum facere quia!
-          </p>
-          <a class="learn_more" href="#">Learn more</a>
-        </div>
+ <?php
+            $tables = [
+                "pl" => "Programming Languages",
+                "wd" => "Web Development",
+                "ad" => "App Development",
+                "tt" => "Tools & Technologies",
+                "ot" => "Other Skills"
+            ];
 
-        <div>
-          <i class="fa-brands fa-android"></i>
-          <h2>App Design</h2>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Dignissimos assumenda laudantium facere tempora hic dicta 
-          </p>
-          <a class="learn_more" href="#">Learn more</a>
-        </div>
-
-        <div>
-          <i class="fa-solid fa-crop-simple"></i>
-          <h2>UI/UX Design</h2>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Dignissimos assumenda laudantium facere tempora hic dicta ea?
-            Facere, quidem labore. Excepturi modi minima incidunt nemo dolore
-            ullam possimus ipsum facere quia!
-          </p>
-          <a class="learn_more" href="#">Learn more</a>
-        </div>
+            foreach ($tables as $table => $title) {
+                $items = fetchRows($conn, $table);
+                echo '<div>';
+                echo '<h2>' . htmlspecialchars($title) . '</h2>';
+                if (!empty($items)) {
+                    echo '<ul>';
+                    foreach ($items as $item) {
+                        echo '<li>' . htmlspecialchars($item) . '</li>';
+                    }
+                    echo '</ul>';
+                } else {
+                    echo '<p>No items found</p>';
+                }
+                echo '</div>';
+            }
+            ?>
       </div>
     </div>
   </div>

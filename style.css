@@ -15,7 +15,7 @@ body {
 }
 
 :root {
-  --primary-color: #ff004f;
+  /* --primary-color: #ff004f; */
   --primary-color: #6050dc;
 
   --secondary-color: #8c7dff;
@@ -301,7 +301,7 @@ nav ul li a:hover::after {
 
 .services_list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   /* Makes a responsive grid where
     Each column is at least 15rem wide.
     Columns can grow to fill space (1fr).
@@ -312,9 +312,12 @@ nav ul li a:hover::after {
 
 .services_list div {
   background-color: #262626;
-  padding: 2.5rem;
+  padding: 2rem;
   font-size: 1.35rem;
+  max-width: 30rem;
+  /* max width of the card  */
   font-weight: 300;
+  border: 2px solid var(--primary-color);
   border-radius: 0.75rem;
   transition: background-color 0.5s, transform 0.5s;
 }
@@ -325,46 +328,9 @@ nav ul li a:hover::after {
 }
 
 .services_list div h2 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 1rem;
-}
-
-.services_list div a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 1.35rem;
-  margin-top: 1rem;
-  display: inline-block;
-
-  text-decoration: underline white;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px; /* thicker underline */
-}
-
-.services_list div a {
-  position: relative;
-  text-decoration: none;
-  color: var(--secondary-color);
-  font-size: 1.35rem;
-  margin-top: 1rem;
-  display: inline-block;
-  transition: color 0.3s ease;
-}
-
-.services_list div a::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  left: 0;
-  bottom: -4px;
-  background-color: #fff;
-  transition: width 0.3s ease;
-}
-
-.services_list div a:hover::after {
-  width: 100%;
 }
 .services_list div:hover {
   background-color: var(--primary-color);
@@ -372,6 +338,18 @@ nav ul li a:hover::after {
 
   transform: translateY(-10px);
   cursor: pointer;
+}
+
+.services_list div ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.services_list div ul li {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #ffffff;
 }
 
 /* ------------ Portfolio section  --------- */
