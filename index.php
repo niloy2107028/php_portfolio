@@ -25,6 +25,7 @@ if ($conn->connect_error) {
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
 </head>
 
 <body>
@@ -72,6 +73,9 @@ if ($conn->connect_error) {
       </div>
     </div>
   </div>
+
+
+
   <!-- About section  -->
   <div id="about">
     <div class="container">
@@ -80,7 +84,7 @@ if ($conn->connect_error) {
           <img src="images/formal.jpeg" alt="user photo" />
         </div>
         <div class="about-col-2">
-          <h1 class="sub_title">About Me</h1>
+          <h1 class="sub_title ab">About Me</h1>
           <?php
           // Fetch bio from about table
           $result = $conn->query("SELECT bio FROM about");
@@ -152,21 +156,22 @@ if ($conn->connect_error) {
 
   <!-- services  -->
 
-<?php
+  <?php
 
-// Function to fetch all rows from a table
-function fetchRows($conn, $table) {
+  // Function to fetch all rows from a table
+  function fetchRows($conn, $table)
+  {
     $rows = [];
     $sql = "SELECT name FROM $table";
     $result = $conn->query($sql);
     if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $rows[] = $row['name'];
-        }
+      while ($row = $result->fetch_assoc()) {
+        $rows[] = $row['name'];
+      }
     }
     return $rows;
-}
-?>
+  }
+  ?>
 
 
 
@@ -174,73 +179,91 @@ function fetchRows($conn, $table) {
     <div class="container">
       <h1 class="sub_title">My Services</h1>
       <div class="services_list">
- <?php
-            $tables = [
-                "pl" => "Programming Languages",
-                "wd" => "Web Development",
-                "ad" => "App Development",
-                "tt" => "Tools & Technologies",
-                "ot" => "Other Skills"
-            ];
+        <?php
+        $tables = [
+          "pl" => "Programming Languages",
+          "wd" => "Web Development",
+          "ad" => "App Development",
+          "tt" => "Tools & Technologies",
+          "ot" => "Other Skills"
+        ];
 
-            foreach ($tables as $table => $title) {
-                $items = fetchRows($conn, $table);
-                echo '<div>';
-                echo '<h2>' . htmlspecialchars($title) . '</h2>';
-                if (!empty($items)) {
-                    echo '<ul>';
-                    foreach ($items as $item) {
-                        echo '<li>' . htmlspecialchars($item) . '</li>';
-                    }
-                    echo '</ul>';
-                } else {
-                    echo '<p>No items found</p>';
-                }
-                echo '</div>';
+        foreach ($tables as $table => $title) {
+          $items = fetchRows($conn, $table);
+          echo '<div>';
+          echo '<h3>' . htmlspecialchars($title) . '</h3>';
+          if (!empty($items)) {
+            echo '<ul>';
+            foreach ($items as $item) {
+              echo '<li>' . htmlspecialchars($item) . '</li>';
             }
-            ?>
+            echo '</ul>';
+          } else {
+            echo '<p>No items found</p>';
+          }
+          echo '</div>';
+        }
+        ?>
       </div>
     </div>
   </div>
 
   <!-- Portfolio section  -->
+
+
+  <?php
+  // Fetch projects
+  $sql = "SELECT p_img_link, p_title, p_des, p_tech, p_link FROM projects";
+  $projects = $conn->query($sql);
+  ?>
+
+
+
   <div id="portfolio">
     <div class="container">
       <h1 class="sub_title">My Work</h1>
       <div class="work_list">
-        <div class="work">
-          <img src="images/work-1.png" alt="work picture 1" />
-          <div class="layer">
-            <h3>Social Media App</h3>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              at repudiandae culpa iusto impedit obcaecati.
-            </p>
-            <a href="#"><i class="fa-solid fa-link"></i></a>
-          </div>
-        </div>
-        <div class="work">
-          <img src="images/work-2.png" alt="work picture 1" />
-          <div class="layer">
-            <h3>Music App</h3>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              at repudiandae culpa iusto impedit obcaecati.
-            </p>
-            <a href="#"><i class="fa-solid fa-link"></i></a>
-          </div>
-        </div>
-        <div class="work">
-          <img src="images/work-3.png" alt="work picture 1" />
-          <div class="layer">
-            <h3>Online Shoping App</h3>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              at repudiandae culpa iusto impedit obcaecati.
-            </p>
-            <a href="#"><i class="fa-solid fa-link"></i></a>
-          </div>
-        </div>
+
+
+        <?php if ($projects && $projects->num_rows > 0): ?>
+          <?php while ($p = $projects->fetch_assoc()): ?>
+            <div class="project-card">
+              <div class="image_div">
+                <img src="images/<?php echo htmlspecialchars($p['p_img_link']); ?>"
+                  alt="<?php echo htmlspecialchars($p['p_title']); ?> Preview"
+                  class="project-img">
+                <div class="layer">
+                  <?php if (!empty($p['p_link'])): ?>
+
+                    <p>View Repository</p>
+                    <a href="<?php echo htmlspecialchars($p['p_link']); ?>" target="_blank">
+
+                      <i class="fa-solid fa-link"></i>
+                    </a>
+
+                  <?php endif; ?>
+                </div>
+              </div>
+              <h3><?php echo htmlspecialchars($p['p_title']); ?></h3>
+              <p><?php echo htmlspecialchars($p['p_des']); ?></p>
+
+                <p>Technologies :</p>
+              <p class="card-tech">
+                <?php
+                $techs = explode(',', $p['p_tech']); // split by comma
+                foreach ($techs as $tech) {
+                  echo '<span class="tech">' . htmlspecialchars(trim($tech)) . '</span> ';
+                }
+                ?>
+              </p>
+
+            </div>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <p>No projects found.</p>
+        <?php endif; ?>
+
+
       </div>
       <a href="#" class="btn">See more</a>
     </div>

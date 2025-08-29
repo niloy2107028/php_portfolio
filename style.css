@@ -16,9 +16,13 @@ body {
 
 :root {
   /* --primary-color: #ff004f; */
-  --primary-color: #6050dc;
+  --tag-color: #6050dc;
+  --primary-color: #8e2de2;
 
-  --secondary-color: #8c7dff;
+  /* background: linear-gradient(135deg, #8e2de2, #4a00e0); */
+
+  /* --secondary-color: #8c7dff; */
+  --secondary-color: #8e2de2;
   /* best for text  */
 }
 #header {
@@ -238,6 +242,10 @@ nav ul li a:hover::after {
   font-size: 4rem;
   font-weight: 500;
   color: #fff;
+  text-align: center;
+}
+.sub_title.ab {
+  text-align: left;
 }
 
 .tab_titles {
@@ -301,7 +309,7 @@ nav ul li a:hover::after {
 
 .services_list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   /* Makes a responsive grid where
     Each column is at least 15rem wide.
     Columns can grow to fill space (1fr).
@@ -313,30 +321,24 @@ nav ul li a:hover::after {
 .services_list div {
   background-color: #262626;
   padding: 2rem;
-  font-size: 1.35rem;
-  max-width: 30rem;
+  font-size: 1.25rem;
+  max-width: 25rem;
+  border: 1px solid var(--primary-color);
   /* max width of the card  */
-  font-weight: 300;
-  border: 2px solid var(--primary-color);
+  /* font-weight: 300; */
   border-radius: 0.75rem;
-  transition: background-color 0.5s, transform 0.5s;
+  transition: background-color 0.5s;
 }
 
-.services_list div i {
-  font-size: 2.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.services_list div h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
+.services_list div h3 {
+  font-size: 1.25rem;
   margin-bottom: 1rem;
 }
 .services_list div:hover {
-  background-color: var(--primary-color);
-  background: linear-gradient(135deg, #6050dc, #3a0ca3);
-
-  transform: translateY(-10px);
+  /* background-color: var(--primary-color); */
+  /* background: linear-gradient(135deg, #6050dc, #3a0ca3); */
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  /* box-shadow: 0 8px 20px rgba(142, 45, 226, 0.6), 0 0 15px rgba(74, 0, 224, 0.7); */
   cursor: pointer;
 }
 
@@ -348,7 +350,7 @@ nav ul li a:hover::after {
 
 .services_list div ul li {
   margin-bottom: 8px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #ffffff;
 }
 
@@ -360,21 +362,84 @@ nav ul li a:hover::after {
 
 .work_list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   grid-gap: 2.5rem;
   margin: 3rem 0;
 }
 
-.work {
+.project-card {
+  background: #262626;
+  background: #1c1c1c;
+  padding: 0.9rem;
+  max-width: 25rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  text-align: left;
+  border: 1px solid var(--primary-color);
+}
+
+.project-card:hover {
+  background: #262626;
+}
+
+.project-card h3 {
+  font-size: 1.25rem;
+  margin: 0.75rem 0;
+  color: #9c6bff;
+  padding: 4px;
+  text-align: center;
+}
+
+.project-card p {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.project-card a {
+  color: #7a02fa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.card-tech {
+  font-size: 0.95rem;
+  display: flex; /* arrange spans in a row */
+  flex-wrap: wrap; /* allow wrapping to next line */
+  gap: 10px; /* uniform spacing left, right, up, down */
+  align-items: center; /* vertically center text and spans */
+}
+
+.tech {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: var(--tag-color);
+  padding: 4px 6px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.image_div {
   border-radius: 0.75rem;
   position: relative;
   overflow: hidden;
+  /* background-color: yellow; */
 }
 
-.work img {
+.image_div img {
   width: 100%;
+  /* auto dile ration thik tahkbe crop hbe na , but i want crop and full width nibe */
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  /* while cropping centered will be safe */
   border-radius: 0.75rem;
   display: block;
+  margin: 0 auto 0;
   transition: transform 0.5s;
 }
 
@@ -382,51 +447,51 @@ nav ul li a:hover::after {
   width: 100%;
   height: 0;
   /* initially hidden */
-  background: linear-gradient(rgba(0, 0, 0, 0.6), var(--primary-color));
   border-radius: 10px;
   position: absolute;
   left: 0;
   bottom: 0;
+  /* background-color: #fff; */
   /* from bottom to top transition */
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 2.5rem;
-  text-align: center;
   font-size: 1.35rem;
   transition: height 0.5s;
-}
-
-.layer h3 {
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-  /* color: green; */
+  text-align: center;
 }
 
 .layer a {
-  margin-top: 1.25rem;
   color: var(--primary-color);
   /* border: 1px solid white;
    */
   text-decoration: none;
-  font-size: 1.35rem;
-  background: white;
-  line-height: 3.5rem;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  line-height: 2.5rem;
   /* height width centereds */
-  height: 3.5rem;
-  width: 3.75rem;
+  height: 2.5rem;
+  width: 2.5rem;
   border-radius: 50%;
   /* circle  */
   text-align: center;
+  /* icon circle er center e thakbe  */
 }
 
-.work:hover img {
+.layer p {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7); /* dark overlay */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.image_div:hover img {
   transform: scale(1.5);
 }
 
-.work:hover .layer {
+.image_div:hover .layer {
   height: 100%;
 }
 
@@ -651,12 +716,14 @@ nav .fa-solid {
   }
 
   .about-col-2 .me {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 
   .sub_title {
     font-size: 1.5rem;
     margin-bottom: 2rem;
+  }
+  .sub_title.ab {
     text-align: center;
   }
 
@@ -685,7 +752,7 @@ nav .fa-solid {
 
   .tab_contents ul li {
     /* color: var(--primary-color); */
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
   .services_list {
     margin-top: 1rem;
@@ -701,20 +768,16 @@ nav .fa-solid {
     font-size: 1rem;
   }
 
-  .services_list div i {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .services_list div h2 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .services_list div a {
+  .services_list div h3 {
     font-size: 1rem;
-    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
+
+  .services_list div ul li {
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+  }
+
   .work_list {
     grid-gap: 1rem;
     margin: 0;

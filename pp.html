@@ -2,20 +2,89 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Gradient Text</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Card</title>
     <style>
-      .gradient-text {
-        font-size: 3rem;
-        font-weight: bold;
-        background: linear-gradient(135deg, #6050dc, #3a0ca3);
-        -webkit-background-clip: text; /* Safari/Chrome */
-        -webkit-text-fill-color: transparent; /* Safari/Chrome */
-        background-clip: text; /* Standard (not fully supported everywhere) */
-        color: transparent; /* fallback */
+      body {
+        background-color: #111;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .card {
+        background: #1c1c1c;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        width: 350px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      }
+
+      .card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-bottom: 1px solid #333;
+      }
+
+      .card-content {
+        padding: 20px;
+        color: #ddd;
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #8a63f3;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .card-description {
+        font-size: 0.95rem;
+        line-height: 1.5rem;
+        margin-bottom: 15px;
+        color: #bbb;
+        text-align: justify;
+      }
+
+      .card-tech {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #fff;
+      }
+
+      .tech-highlight {
+        color: #8a63f3;
       }
     </style>
   </head>
   <body>
-    <h1 class="gradient-text">Gradient Text Example</h1>
+    <div class="card">
+      <img
+        src="https://e7.pngegg.com/pngimages/377/290/png-clipart-telegram-internet-meme-police-sticker-meme-sticker-meme-thumbnail.png"
+      />
+      <div class="card-content">
+        <h2 class="card-title">Police Management System</h2>
+        <p class="card-description">
+          A console-based application to manage police operations efficiently.
+          Handles officers, cases, and reporting using OOP concepts. Designed
+          for learning object-oriented programming in C++. Includes structured
+          data management for real-world scenarios.
+        </p>
+        <p class="card-tech">
+          Technologies: <span class="tech-highlight">C++</span>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
