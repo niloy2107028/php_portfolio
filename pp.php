@@ -1,5 +1,8 @@
+<!-- services  -->
 <?php
-// db_connect.php
+
+
+// db_connect.php (or at the top of your HTML file)
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -10,10 +13,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch projects
-$sql = "SELECT p_img_link, p_title, p_des, p_tech, p_link FROM projects";
-$projects = $conn->query($sql);
+
+// Function to fetch all rows from a table
+function fetchRows($conn, $table)
+{
+    $rows = [];
+    $sql = "SELECT name FROM $table";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row['name'];
+        }
+    }
+    return $rows;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,128 +36,145 @@ $projects = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
+    <title>Document</title>
     <style>
-        /*------------------project Section------------------*/
-        #projects {
-            padding: 60px 0 100px;
-            background-color: #01181c;
-            color: #ffffff;
+        .service-card {
+            background-color: #262626;
+            padding: 1.5rem;
+            font-size: 1rem;
+            max-width: 25rem;
+            border: 1px solid var(--primary-color);
+            border-radius: 0.75rem;
+            transition: background-color 0.5s;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+        .service-card:hover {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            cursor: pointer;
         }
 
-        .project-card {
-            background: #02252b;
-            padding: 20px;
-            max-width: 400px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease;
-            text-align: left;
+        .service-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #fff;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(238, 1, 1, 0.818);
-        }
-
-        .project-card img {
+        .service-table {
             width: 100%;
-            /* auto dile ration thik tahkbe crop hbe na , but i want crop and full width nibe */
-            height: 250px;
-            object-fit: cover;
-            object-position: center;
-            /* while cropping centered will be safe */
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto 15px;
+            border-collapse: collapse;
         }
 
-        .project-card h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #ff004f;
+        .service-table th,
+        .service-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #444;
+            color: #fff;
         }
 
-        .project-card p {
-            font-size: 14px;
-            color: #ccc;
-            margin-bottom: 10px;
-            line-height: 1.6;
+        .service-table th {
+            color: var(--tag-color);
+            font-weight: 600;
         }
 
-        .project-card a {
-            color: #7a02fa;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s ease;
+        .service-table td.actions {
+            text-align: right;
         }
 
-        .repo-link {
-            display: inline-block;
-            padding: 6px 14px;
-            margin-top: 6px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background 0.3s ease;
+        .edit-btn,
+        .delete-btn,
+        .add-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+            transition: transform 0.2s;
         }
 
-        .repo-link:hover {
-            background-color: #045e840a;
+        .edit-btn:hover {
+            color: #4cafef;
+            transform: scale(1.1);
+        }
+
+        .delete-btn:hover {
+            color: #ff4b5c;
+            transform: scale(1.1);
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px dashed var(--tag-color);
+        }
+
+        .add-btn:hover {
+            background-color: rgba(142, 45, 226, 0.2);
+            transform: scale(1.02);
         }
     </style>
 </head>
 
 <body>
-
-    <div id="projects">
+    <div id="services">
         <div class="container">
-            <h1 class="sub-title">Projects</h1>
-            <div class="projects-grid">
+            <h1 class="sub_title">My Services</h1>
+            <div class="services_list">
+                <?php
+                $tables = [
+                    "pl" => "Programming Languages",
+                    "wd" => "Web Development",
+                    "ad" => "App Development",
+                    "tt" => "Tools & Technologies",
+                    "ot" => "Other Skills"
+                ];
 
-                <?php if ($projects && $projects->num_rows > 0): ?>
-                    <?php while ($p = $projects->fetch_assoc()): ?>
-                        <div class="project-card">
-                            <div class="work">
-                                <img src="images/<?php echo htmlspecialchars($p['p_img_link']); ?>"
-                                    alt="<?php echo htmlspecialchars($p['p_title']); ?> Preview"
-                                    class="project-img">
-                                <div class="layer">
-                                    <h3>Social Media App</h3>
-                                    <p>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-                                        at repudiandae culpa iusto impedit obcaecati.
-                                    </p>
-                                    <a href="#"><i class="fa-solid fa-link"></i></a>
-                                </div>
-                            </div>
-                            <h3><?php echo htmlspecialchars($p['p_title']); ?></h3>
-                            <p><?php echo htmlspecialchars($p['p_des']); ?></p>
-                            <p><strong>Technologies:</strong> <?php echo htmlspecialchars($p['p_tech']); ?></p>
-                            <?php if (!empty($p['p_link'])): ?>
-                                <p>
-                                    <a class="repo-link" href="<?php echo htmlspecialchars($p['p_link']); ?>" target="_blank">
-                                        View Repository
-                                    </a>
-                                </p>
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <p>No projects found.</p>
-                <?php endif; ?>
-
+                foreach ($tables as $table => $title) {
+                    $items = fetchRows($conn, $table);
+                    echo '<div class="service-card">';
+                    echo '<h3>' . htmlspecialchars($title) . '</h3>';
+                    echo '<table class="service-table">';
+                    echo '<thead><tr><th>Item</th><th>Action</th></tr></thead>';
+                    echo '<tbody>';
+                    if (!empty($items)) {
+                        foreach ($items as $item) {
+                            echo '<tr>';
+                            echo '<td>' . htmlspecialchars($item) . '</td>';
+                            echo '<td class="actions">
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑</button>
+                  </td>';
+                            echo '</tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="2">No items found</td></tr>';
+                    }
+                    // Add new item form row
+                    echo '<tr class="add-row">
+        <td colspan="2">
+          <form method="POST" action="add_skill.php" class="add-skill-form">
+            <div class="form-group-inline">
+              <input 
+                type="text" 
+                name="skill_name" 
+                class="form-input" 
+                placeholder="Enter new skill" 
+                required 
+              />
+              <input type="hidden" name="table" value="' . htmlspecialchars($table) . '" />
+              <button type="submit" class="btn-submit add-btn">➕ Add</button>
+            </div>
+          </form>
+        </td>
+      </tr>';
+                }
+                ?>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

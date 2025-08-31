@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Skill Card</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #0f0f23 0%,
+          #1a1a2e 50%,
+          #16213e 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .skill-card {
+        background: rgba(30, 30, 46, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 40px;
+        width: 100%;
+        max-width: 480px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981, #f59e0b);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .card-title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #8b5cf6, #06b6d4, #10b981);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 40px;
+        letter-spacing: -0.5px;
+      }
+
+      .form-group {
+        margin-bottom: 28px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #e2e8f0;
+        margin-bottom: 12px;
+        letter-spacing: 0.025em;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 16px 20px;
+        border: 2px solid #374151;
+        border-radius: 16px;
+        font-size: 16px;
+        color: #f8fafc;
+        background: rgba(17, 24, 39, 0.8);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        outline: none;
+        font-family: inherit;
+      }
+
+      .form-input:focus {
+        border-color: #8b5cf6;
+        background: rgba(17, 24, 39, 1);
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1),
+          0 4px 12px rgba(139, 92, 246, 0.2);
+        transform: translateY(-1px);
+      }
+
+      .form-input::placeholder {
+        color: #9ca3af;
+        font-weight: 400;
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+        font-family: inherit;
+      }
+
+      .add-button {
+        width: 100%;
+        padding: 18px 24px;
+        background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+        color: white;
+        border: none;
+        border-radius: 16px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        letter-spacing: 0.025em;
+        position: relative;
+        overflow: hidden;
+        margin-top: 12px;
+      }
+
+      .add-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .add-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4),
+          0 4px 12px rgba(6, 182, 212, 0.3);
+      }
+
+      .add-button:hover::before {
+        left: 100%;
+      }
+
+      .add-button:active {
+        transform: translateY(0);
+      }
+
+      /* Success animation */
+      @keyframes success {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(0.95);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .success-animation {
+        animation: success 0.3s ease;
+      }
+
+      /* Floating elements for visual appeal */
+      .floating-element {
+        position: absolute;
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      .floating-1 {
+        top: 20px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 50%;
+        animation: float1 6s ease-in-out infinite;
+      }
+
+      .floating-2 {
+        bottom: 30px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(45deg, #f093fb, #f5576c);
+        border-radius: 50%;
+        animation: float2 4s ease-in-out infinite;
+      }
+
+      @keyframes float1 {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      @keyframes float2 {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(-180deg);
+        }
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 480px) {
+        .skill-card {
+          padding: 24px;
+          margin: 10px;
+        }
+
+        .card-title {
+          font-size: 28px;
+          margin-bottom: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="skill-card">
+      <div class="floating-element floating-1"></div>
+      <div class="floating-element floating-2"></div>
+
+      <h1 class="card-title">Add New Skill</h1>
+
+      <form id="skillForm">
+        <div class="form-group">
+          <label for="skillTitle" class="form-label">Skill Title</label>
+          <input
+            type="text"
+            id="skillTitle"
+            class="form-input"
+            placeholder="Enter skill title"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="skillDescription" class="form-label"
+            >Skill Description</label
+          >
+          <textarea
+            id="skillDescription"
+            class="form-input form-textarea"
+            placeholder="Enter skill description"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="add-button">Add Skill</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("skillForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const button = document.querySelector(".add-button");
+          const card = document.querySelector(".skill-card");
+
+          // Add success animation
+          card.classList.add("success-animation");
+
+          // Change button text temporarily
+          const originalText = button.textContent;
+          button.textContent = "Skill Added! ✓";
+          button.style.background =
+            "linear-gradient(135deg, #48bb78 0%, #38a169 100%)";
+
+          // Reset after animation
+          setTimeout(() => {
+            card.classList.remove("success-animation");
+            button.textContent = originalText;
+            button.style.background =
+              "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+
+            // Clear form
+            document.getElementById("skillTitle").value = "";
+            document.getElementById("skillDescription").value = "";
+          }, 2000);
+        });
+
+      // Add subtle input animations
+      document.querySelectorAll(".form-input").forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.style.transform = "translateY(-1px)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.style.transform = "translateY(0)";
+        });
+      });
+    </script>
+  </body>
+</html>

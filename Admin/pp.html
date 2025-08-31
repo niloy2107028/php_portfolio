@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Manage Skills</title>
+    <script
+      src="https://kit.fontawesome.com/b59187c32e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        box-sizing: border-box;
+      }
+      body {
+        background: #000;
+        color: #fff;
+      }
+      :root {
+        --primary-color: #8e2de2;
+        --secondary-color: #6050dc;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 0.75rem 10%;
+        background: #262626;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .logo_p p {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .logo_p span {
+        color: var(--primary-color);
+      }
+      .container {
+        padding: 2rem 10%;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav>
+      <div class="logo_p">
+        <p><span>N</span>iloy. Admin</p>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h2>Manage Skills</h2>
+
+      <!-- Skill Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Skill Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Web Development</td>
+            <td>HTML, CSS, JavaScript, React.js</td>
+            <td class="actions">
+              <button class="btn-edit"><i class="fa fa-edit"></i> Edit</button>
+              <button class="btn-delete">
+                <i class="fa fa-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>App Development</td>
+            <td>Flutter, React Native, Java (Android)</td>
+            <td class="actions">
+              <button class="btn-edit"><i class="fa fa-edit"></i> Edit</button>
+              <button class="btn-delete">
+                <i class="fa fa-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Add Skill Form -->
+      <div class="form-container">
+        <h3>Add New Skill</h3>
+        <form>
+          <div class="form-group">
+            <label for="title">Skill Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter skill title"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Skill Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              placeholder="Enter skill description"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Add Skill</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -66,7 +66,7 @@ if ($conn->connect_error) {
             echo '<li>No skills found</li>';
           }
 
-          // $conn->close();
+
           ?>
         </ol>
         <h1 class="location">based in Bangladesh</h1>
@@ -105,7 +105,7 @@ if ($conn->connect_error) {
 
 
           <!-- fetch data from table called skills  -->
-          <div class="tab_contents   active_tab" id="skills">
+          <div class="tab_contents  active_tab" id="skills">
             <ul>
               <?php
               $sql = "SELECT skill_name, skill_des FROM skills";
@@ -247,7 +247,7 @@ if ($conn->connect_error) {
               <h3><?php echo htmlspecialchars($p['p_title']); ?></h3>
               <p><?php echo htmlspecialchars($p['p_des']); ?></p>
 
-                <p>Technologies :</p>
+              <p>Technologies :</p>
               <p class="card-tech">
                 <?php
                 $techs = explode(',', $p['p_tech']); // split by comma
@@ -323,3 +323,7 @@ if ($conn->connect_error) {
 </body>
 
 </html>
+
+<?php
+$conn->close();
+?>
