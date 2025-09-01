@@ -26,407 +26,8 @@ if ($conn->connect_error) {
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      font-family: "Poppins", sans-serif;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: #01181c;
-      color: #fff;
-    }
-
-    :root {
-      /* --primary-color: #ff004f; */
-      --tag-color: #6050dc;
-      --primary-color: #8e2de2;
-
-      /* background: linear-gradient(135deg, #8e2de2, #4a00e0); */
-
-      /* --secondary-color: #8c7dff; */
-      --secondary-color: #8e2de2;
-      /* best for text  */
-    }
-
-    .container {
-      padding: 0 10%;
-      margin: 1rem 0 2rem;
-
-      /* background-color: red; */
-    }
-
-    /* ------------------navbar-------------------- */
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      padding: 0 10%;
-      background: #262626;
-      position: sticky;
-      top: 0;
-      /* 👈 required */
-      z-index: 10;
-    }
-
-    .logo_p p {
-      font-size: 2rem;
-      font-weight: 600;
-      font-family: "Poppins", sans-serif;
-    }
-
-    .logo_p p:hover {
-      cursor: pointer;
-    }
-
-    .logo_p span {
-      color: var(--primary-color);
-    }
-
-    nav ul li {
-      display: inline-block;
-      list-style: none;
-      /* li default styling remove */
-      margin: 0.75rem 1.25rem;
-    }
-
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.25rem;
-      position: relative;
-    }
-
-    nav ul li a::after {
-      content: "";
-      width: 0;
-      height: 4px;
-      background: var(--primary-color);
-      /* background: #003bfc; */
-
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      transition: 0.5s;
-    }
-
-    nav ul li a:hover::after {
-      width: 100%;
-    }
-
-    nav .fa-solid {
-      display: none;
-    }
-
-    /* -----------------skill section --------------- */
-
-    .section {
-      background: #1c1c1c;
-      padding: 1rem 2.5%;
-      border-radius: 1.5rem;
-      border: 1px solid var(--primary-color);
-      /* background-color: #262626; */
-    }
-
-    .section_title {
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-
-    .from_title {
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-
-    /* ----------------------table--------------------- */
-
-    table {
-      width: 100%;
-      margin-bottom: 2rem;
-      background: #363636;
-      border-collapse: collapse;
-      border-spacing: 0;
-      /* Remove gaps */
-      overflow: hidden;
-    }
-
-    table thead {
-      background: linear-gradient(135deg,
-          #8e2de2,
-          #4a00e0);
-      /* purple gradient header */
-      color: #fff;
-    }
-
-    table th,
-    table td {
-      padding: 0.75rem;
-      font-size: 1rem;
-      font-weight: 300;
-      text-align: left;
-      border: 1px solid white;
-      /* Row border */
-    }
-
-    table td {
-      font-size: 1rem;
-    }
-
-    .actions button {
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-right: 0.5rem;
-    }
-
-    .btn-edit {
-      background: var(--primary-color);
-      border: 2px solid transparent;
-      color: #fff;
-      transition: border 0.2s ease;
-    }
-
-    .btn-edit:hover {
-      border: 2px solid white;
-    }
-
-    .btn-delete {
-      color: #fff;
-      background: #ff004f;
-      transition: border 0.2s ease;
-      border: 2px solid transparent;
-      border-radius: 0.5rem;
-      padding: 0.7rem 1.5rem;
-      cursor: pointer;
-    }
-
-    .btn-delete:hover {
-      border: 2px solid white;
-    }
-
-    /* ---------------------------form--------------------- */
-
-    .form-container {
-      background: #363636;
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid white;
-      max-width: 100%;
-      margin: auto;
-    }
-
-    .form-container h3 {
-      margin-bottom: 1rem;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: 400;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-size: 1rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.7rem;
-      border: 2px solid #374151;
-      outline: none;
-      border-radius: 8px;
-      background: #1c1c1c;
-      color: #fff;
-    }
-
-    .form-input:focus {
-      border-color: white;
-      /* background: rgba(17, 24, 39, 1); */
-    }
-
-    .form-input::placeholder {
-      color: #9ca3af;
-      font-weight: 400;
-      font-size: 0.85rem;
-    }
-
-    .form-group textarea {
-      resize: none;
-    }
-
-    .btn-submit {
-      display: block;
-      width: 60%;
-      margin: 1.5rem auto 0;
-      padding: 0.75rem;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #8e2de2, #4a00e0);
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .btn-submit:hover {
-      border: 2px solid white;
-    }
-
-    /* --------about---------- */
-
-    #about {
-      width: 100%;
-      /* background-color: red; */
-    }
-
-    .image-edit-preview {
-      max-width: 180px;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-      /* margin-top: 0.5rem; */
-    }
-
-    input[type="file"] {
-      width: 100%;
-      border: 1px solid transparent;
-      outline: none;
-      background: #1c1c1c;
-      padding: 0.9rem 1rem;
-      color: #fff;
-      font-size: 1rem;
-      border-radius: 0.5rem;
-      box-sizing: border-box;
-      transition: border 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    input[type="file"]:focus {
-      border: 1px solid var(--primary-color);
-      box-shadow: 0 0 0 2px var(--primary-color);
-    }
-
-    /* ----------------------service-------------------  */
-
-    #services {
-      padding: 2rem 0;
-    }
-
-    .services_list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-      /* Makes a responsive grid where
-    Each column is at least 15rem wide.
-    Columns can grow to fill space (1fr).
-    The grid auto-fits as many columns as possible in the container. */
-      grid-gap: 2.5rem;
-      margin-top: 3rem;
-    }
-
-
-    .services_list div {
-      background-color: #262626;
-      padding: 1rem;
-      font-size: 0.75rem;
-      max-width: 45rem;
-      /* max width of the card  */
-      /* font-weight: 300; */
-      border-radius: 0.75rem;
-      transition: background-color 0.5s;
-    }
-
-    .services-card {
-      border: 1px solid var(--primary-color);
-    }
-
-    .services_list div h3 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      font-weight: 300;
-      text-align: center;
-    }
-
-
-
-
-
-
-
-    .services_list table th,
-    .services_list table td {
-      padding: 0.25rem 0.75rem;
-      font-size: 0.75rem;
-      font-weight: 300;
-      text-align: left;
-      border: 1px solid white;
-      /* Row border */
-    }
-
-    .service_action i {
-      cursor: pointer;
-      margin-right: 0.75rem;
-    }
-
-    .service_action i:hover {
-      color: var(--primary-color);
-    }
-
-
-    @media only screen and (max-width: 768px) {
-      .container {
-        padding: 0.5rem 5% 0.5rem;
-        /* background-color: red; */
-      }
-
-      nav .fa-solid {
-        display: block;
-        font-size: 1.25rem;
-      }
-
-      nav ul {
-        background: var(--primary-color);
-        position: fixed;
-        /* fixed on the screen make a scroll to understand pos realted to initial block body */
-        top: 0;
-        right: 0;
-        width: 12.5rem;
-        right: -12.5rem;
-        /* better transition after using the same width */
-        height: 100vh;
-        padding-top: 3rem;
-        z-index: 2;
-        /* safety */
-        transition: right 0.3s;
-      }
-
-      nav ul li {
-        display: block;
-        /* take full width */
-        margin: 1.5rem;
-      }
-
-      nav ul .fa-solid {
-        position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -446,78 +47,6 @@ if ($conn->connect_error) {
     </ul>
     <i class="fa-solid fa-bars" onclick="open_menu()"></i>
   </nav>
-
-  <!-- ----------------skill section--------------- -->
-  <div class="container">
-    <div class="section" id="skill">
-      <h2 class="section_title">Manage Skills</h2>
-
-      <!-- Skill Table -->
-      <table>
-        <thead>
-          <tr>
-            <th>Skill Title</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Web Development</td>
-            <td>HTML, CSS, JavaScript, React.js</td>
-            <td class="actions">
-              <button class="btn-edit">
-                <i class="fa fa-edit"></i> Edit
-              </button>
-              <button class="btn-delete">
-                <i class="fa fa-trash"></i> Delete
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>App Development</td>
-            <td>Flutter, React Native, Java (Android)</td>
-            <td class="actions">
-              <button class="btn-edit">
-                <i class="fa fa-edit"></i> Edit
-              </button>
-              <button class="btn-delete">
-                <i class="fa fa-trash"></i> Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Add Skill Form -->
-      <div class="form-container">
-        <h3 class="form_title">Add New Skill</h3>
-        <form>
-          <div class="form-group">
-            <label for="title">Skill Title</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              class="form-input"
-              placeholder="Enter skill title"
-              required />
-          </div>
-          <div class="form-group">
-            <label for="description">Skill Description</label>
-            <textarea
-              id="description"
-              name="description"
-              rows="4"
-              class="form-input"
-              placeholder="Enter skill description"
-              required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Add Skill</button>
-        </form>
-      </div>
-    </div>
-  </div>
 
   <!-- ------------about section-----------------------  -->
 
@@ -568,12 +97,111 @@ if ($conn->connect_error) {
     </div>
   </div>
 
-  <!-- ----------------skill section--------------- -->
+
+  <!-- ------------------new skill section ------------------------   -->
+
+  <?php
+  // Fetch skills from DB
+  $sql = "SELECT id, skill_name, skill_des FROM skills";
+  $skills = $conn->query($sql);
+  ?>
+
   <div class="container">
     <div class="section" id="skill">
-      <h2 class="section_title">Manage Education</h2>
+      <h2 class="section_title">Manage Skills</h2>
 
       <!-- Skill Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Skill Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if ($skills && $skills->num_rows > 0): ?>
+            <?php while ($s = $skills->fetch_assoc()): ?>
+              <tr>
+                <td>
+                  <form action="update_skill.php" method="POST" class="table_inner_form">
+                    <input type="hidden" name="id" value="<?php echo $s['id']; ?>">
+                    <input type="text" name="skill_name"
+                      value="<?php echo htmlspecialchars($s['skill_name']); ?>"
+                      class="table_input" required>
+                </td>
+                <td>
+                  <textarea name="skill_des" rows="5" class="table_input" required><?php echo htmlspecialchars($s['skill_des']); ?></textarea>
+                </td>
+                <td class="actions">
+                  <button type="submit" class="btn-edit">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                  </form>
+
+                  <form action="delete_skill.php" method="POST" style="display:inline;"
+                    onsubmit="return confirm('Are you sure you want to delete this skill?');">
+                    <input type="hidden" name="id" value="<?php echo $s['id']; ?>">
+                    <button type="submit" class="btn-delete">
+                      <i class="fa fa-trash"></i> Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="3">No skills found.</td>
+            </tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+
+      <!-- Add Skill Form -->
+      <div class="form-container">
+        <h3 class="form_title">Add New Skill</h3>
+        <form action="add_skill.php" method="POST">
+          <div class="form-group">
+            <label for="title">Skill Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              class="form-input"
+              placeholder="Enter skill title"
+              required />
+          </div>
+          <div class="form-group">
+            <label for="description">Skill Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              class="form-input"
+              placeholder="Enter skill description"
+              required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Add Skill</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ------------------new Education section ------------------------   -->
+
+  <?php
+  // Fetch skills from DB
+  $sql = "SELECT id, year, degree FROM education";
+  $educations = $conn->query($sql);
+  ?>
+
+  <div class="container">
+    <div class="section" id="education">
+      <h2 class="section_title">Manage Education</h2>
+
+      <!-- Education Table -->
       <table>
         <thead>
           <tr>
@@ -583,68 +211,76 @@ if ($conn->connect_error) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Web Development</td>
-            <td>HTML, CSS, JavaScript, React.js</td>
-            <td class="actions">
-              <button class="btn-edit">
-                <i class="fa fa-edit"></i> Edit
-              </button>
-              <button class="btn-delete">
-                <i class="fa fa-trash"></i> Delete
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>App Development</td>
-            <td>Flutter, React Native, Java (Android)</td>
-            <td class="actions">
-              <button class="btn-edit">
-                <i class="fa fa-edit"></i> Edit
-              </button>
-              <button class="btn-delete">
-                <i class="fa fa-trash"></i> Delete
-              </button>
-            </td>
-          </tr>
+          <?php if ($educations && $educations->num_rows > 0): ?>
+            <?php while ($s = $educations->fetch_assoc()): ?>
+              <tr>
+                <td>
+                  <form action="update_education.php" method="POST" class="table_inner_form">
+                    <input type="hidden" name="id" value="<?php echo $s['id']; ?>">
+                    <input type="number" name="year"
+                      value="<?php echo htmlspecialchars($s['year']); ?>"
+                      min="1900"
+                      max="2099"
+                      step="1"
+                      class="table_input" required>
+                </td>
+                <td>
+                  <input type="text" name="degree" class="table_input" required value="<?php echo htmlspecialchars($s['degree']); ?>">
+                </td>
+                <td class="actions">
+                  <button type="submit" class="btn-edit">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                  </form>
+
+                  <form action="delete_skill.php" method="POST" style="display:inline;"
+                    onsubmit="return confirm('Are you sure you want to delete this degree?');">
+                    <input type="hidden" name="id" value="<?php echo $s['id']; ?>">
+                    <button type="submit" class="btn-delete">
+                      <i class="fa fa-trash"></i> Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="3">No Degree found.</td>
+            </tr>
+          <?php endif; ?>
         </tbody>
       </table>
 
       <!-- Add Skill Form -->
       <div class="form-container">
-        <h3 class="form_title">Education Section</h3>
-        <form>
+        <h3 class="form_title">Add New Skill</h3>
+        <form action="add_skill.php" method="POST">
           <div class="form-group">
-            <label for="year">Graduation Year</label>
-            <input
-              type="number"
-              id="year"
-              name="year"
-              class="form-input"
-              placeholder="Enter graduation year (e.g., 2025)"
-              min="1900"
-              max="2099"
-              step="1"
-              required />
-          </div>
-
-          <!-- Degree Title -->
-          <div class="form-group">
-            <label for="degree">Academic Degree</label>
+            <label for="title">Skill Title</label>
             <input
               type="text"
-              id="degree"
-              name="degree"
+              id="title"
+              name="title"
               class="form-input"
-              placeholder="Enter your degree (e.g., BSc in Computer Science)"
+              placeholder="Enter skill title"
               required />
           </div>
-
+          <div class="form-group">
+            <label for="description">Skill Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              class="form-input"
+              placeholder="Enter skill description"
+              required></textarea>
+          </div>
           <button type="submit" class="btn-submit">Add Skill</button>
         </form>
       </div>
     </div>
   </div>
+
 
 
   <!-- ----------------service section--------------- -->
@@ -707,18 +343,18 @@ if ($conn->connect_error) {
           echo '</table>';
 
           // Add new item form row
-          echo '<form>
-          <div class="form-group">
-            <label for="title">Skill Title</label>
+          echo '<form class="service_form">
+          <div class="service_group">
+            <label for="title">Add New</label>
             <input
               type="text"
               id="title"
               name="title"
               class="form-input"
-              placeholder="Enter skill title"
+              placeholder="Enter Name"
               required />
           </div>
-          <button type="submit" class="btn-submit">Add Skill</button>
+          <button type="submit" class="service_button">Add Skill</button>
         </form>';
           echo '</div>';
         }
@@ -728,6 +364,99 @@ if ($conn->connect_error) {
     </div>
   </div>
 
+  <!-- --------------------------projects-------------------------------->
+
+  <?php
+  // Fetch projects
+  $sql = "SELECT id, p_img_link, p_title, p_des, p_tech, p_link FROM projects";
+  $projects = $conn->query($sql);
+  ?>
+
+  <div class="container">
+    <div class="section" id="admin-projects">
+      <h2 class="section_title">Manage Projects</h2>
+      <div class="work_list">
+
+        <?php if ($projects && $projects->num_rows > 0): ?>
+          <?php while ($p = $projects->fetch_assoc()): ?>
+            <div class="project-card">
+              <div class="image_div">
+                <img src="../images/<?php echo htmlspecialchars($p['p_img_link']); ?>"
+                  alt="<?php echo htmlspecialchars($p['p_title']); ?> Preview"
+                  class="project-img">
+
+                <div class="layer">
+                  <?php if (!empty($p['p_link'])): ?>
+                    <p>View Repository</p>
+                    <a href="<?php echo htmlspecialchars($p['p_link']); ?>" target="_blank">
+                      <i class="fa-solid fa-link"></i>
+                    </a>
+                  <?php endif; ?>
+                </div>
+              </div>
+
+              <h3><?php echo htmlspecialchars($p['p_title']); ?></h3>
+              <p><?php echo htmlspecialchars($p['p_des']); ?></p>
+
+              <p>Technologies :</p>
+              <p class="card-tech">
+                <?php
+                $techs = explode(',', $p['p_tech']);
+                foreach ($techs as $tech) {
+                  echo '<span class="tech">' . htmlspecialchars(trim($tech)) . '</span> ';
+                }
+                ?>
+              </p>
+
+              <!-- Action buttons -->
+              <div class="service_action">
+                <button class="btn-edit pb"> <i class="fa fa-edit"></i> Edit </button> <button class="btn-delete pb"> <i class="fa fa-trash"></i> Delete </button>
+              </div>
+
+            </div>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <p>No projects found.</p>
+        <?php endif; ?>
+
+      </div>
+
+      <!-- Add new project form -->
+      <div class="form-container">
+        <h2 class="section_title">Add a New Project</h2>
+        <form action="add_project.php" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="p_title">Project Title</label>
+            <input type="text" id="p_title" name="p_title" class="form-input" placeholder="Enter project title" required />
+          </div>
+
+          <div class="form-group">
+            <label for="p_des">Description</label>
+            <textarea id="p_des" name="p_des" class="form-input" placeholder="Enter project description" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="p_tech">Technologies (comma separated)</label>
+            <input type="text" id="p_tech" name="p_tech" class="form-input" placeholder="e.g. PHP, MySQL, JavaScript" required />
+          </div>
+
+          <div class="form-group">
+            <label for="p_link">Repository Link</label>
+            <input type="url" id="p_link" name="p_link" class="form-input" placeholder="https://github.com/..." />
+          </div>
+
+          <div class="service_group">
+            <label for="p_img_link">Upload Image</label>
+            <input type="file" id="p_img_link" name="p_img_link" class="form-input" accept="image/*" required />
+          </div>
+
+          <button type="submit" class="btn-submit">Add Project</button>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
 
 
 

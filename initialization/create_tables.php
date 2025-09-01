@@ -116,7 +116,7 @@ if ($conn->query($sql) === TRUE) {
 // Create table others
 $sql = "CREATE TABLE ot (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(20) NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
     echo "OT table created successfully\n";

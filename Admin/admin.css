@@ -1,0 +1,601 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #01181c;
+  color: #fff;
+}
+
+:root {
+  /* --primary-color: #ff004f; */
+  --tag-color: #6050dc;
+  --primary-color: #8e2de2;
+
+  /* background: linear-gradient(135deg, #8e2de2, #4a00e0); */
+
+  /* --secondary-color: #8c7dff; */
+  --secondary-color: #8e2de2;
+  /* best for text  */
+}
+
+.container {
+  padding: 0 10%;
+  margin: 1rem 0 2rem;
+
+  /* background-color: red; */
+}
+
+/* ------------------navbar-------------------- */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 10%;
+  background: #262626;
+  position: sticky;
+  top: 0;
+  /* 👈 required */
+  z-index: 10;
+}
+
+.logo_p p {
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+.logo_p p:hover {
+  cursor: pointer;
+}
+
+.logo_p span {
+  color: var(--primary-color);
+}
+
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  /* li default styling remove */
+  margin: 0.75rem 1.25rem;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.25rem;
+  position: relative;
+}
+
+nav ul li a::after {
+  content: "";
+  width: 0;
+  height: 4px;
+  background: var(--primary-color);
+  /* background: #003bfc; */
+
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  transition: 0.5s;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav .fa-solid {
+  display: none;
+}
+
+/* -----------------skill section --------------- */
+
+.section {
+  background: #1c1c1c;
+  padding: 1rem 2.5%;
+  border-radius: 1.5rem;
+  border: 1px solid var(--primary-color);
+  /* background-color: #262626; */
+}
+
+.section_title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.from_title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+/* ----------------------table--------------------- */
+
+table {
+  width: 100%;
+  margin-bottom: 2rem;
+  background: #363636;
+  border-collapse: collapse;
+  border-spacing: 0;
+  /* Remove gaps */
+  overflow: hidden;
+}
+
+table thead {
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  /* purple gradient header */
+  color: #fff;
+}
+
+table th,
+table td {
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 300;
+  text-align: left;
+  border: 1px solid white;
+  /* Row border */
+}
+
+table td {
+  font-size: 1rem;
+}
+
+.actions button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.btn-edit {
+  background: green;
+  border: 2px solid transparent;
+  color: #fff;
+  transition: border 0.2s ease;
+}
+
+.btn-edit:hover {
+  border: 2px solid white;
+}
+
+.btn-delete {
+  color: #fff;
+  background: #ff004f;
+  transition: border 0.2s ease;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  border: 2px solid white;
+}
+
+/* ---------------------------form--------------------- */
+
+.form-container {
+  background: #363636;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid white;
+  max-width: 100%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.form-container h3 {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 2px solid #374151;
+  outline: none;
+  border-radius: 8px;
+  background: #1c1c1c;
+  color: #fff;
+}
+
+.form-input:focus {
+  border-color: white;
+  /* background: rgba(17, 24, 39, 1); */
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.form-group textarea {
+  resize: none;
+}
+
+.btn-submit {
+  display: block;
+  width: 60%;
+  margin: 1.5rem auto 0;
+  padding: 0.75rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  border: 2px solid white;
+}
+
+/* ------------------table_inner_form--------   */
+
+.table_input {
+  width: 100%;
+  display: block; /* makes them stretch horizontally */
+  box-sizing: border-box; /* padding doesn’t overflow */
+  resize: none;
+}
+
+/* --------about---------- */
+
+#about {
+  width: 100%;
+  /* background-color: red; */
+}
+
+.image-edit-preview {
+  max-width: 180px;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  /* margin-top: 0.5rem; */
+}
+
+input[type="file"] {
+  width: 100%;
+  border: 1px solid transparent;
+  outline: none;
+  background: #1c1c1c;
+  padding: 0.9rem 1rem;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="file"]:focus {
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* ----------------------service-------------------  */
+
+#services {
+  padding: 2rem 0;
+}
+
+.services_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  /* Makes a responsive grid where
+    Each column is at least 15rem wide.
+    Columns can grow to fill space (1fr).
+    The grid auto-fits as many columns as possible in the container. */
+  grid-gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.services_list div {
+  background-color: #262626;
+  padding: 1rem;
+  font-size: 1rem;
+  max-width: 45rem;
+  /* max width of the card  */
+  /* font-weight: 300; */
+  border-radius: 0.75rem;
+  transition: background-color 0.5s;
+}
+
+.service-table {
+  margin-bottom: 5px;
+}
+
+.services-card {
+  border: 1px solid var(--primary-color);
+}
+
+.services_list div h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.services_list table th,
+.services_list table td {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 300;
+  text-align: left;
+  border: 1px solid white;
+  /* Row border */
+}
+
+.service_action i {
+  cursor: pointer;
+  margin-right: 0.75rem;
+}
+
+.service_action i:hover {
+  color: var(--primary-color);
+}
+
+.services_list .service_group {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.service_group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+
+.service_group input {
+  width: 80%;
+  padding: 0.4rem;
+  border: 2px solid #374151;
+  outline: none;
+  border-radius: 8px;
+  background: #1c1c1c;
+  color: #fff;
+}
+
+.service_group:focus {
+  border-color: white;
+  /* background: rgba(17, 24, 39, 1); */
+}
+
+.service_group::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+  font-size: 0.5rem;
+}
+
+.service_button {
+  display: block;
+  margin: 0.5rem auto 0;
+  padding: 0.5rem 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.service_button:hover {
+  border: 1px solid white;
+}
+
+/* --------------------------------project--------  */
+
+#portfolio {
+  pad: 3rem 0;
+}
+
+.work_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 2.5rem;
+  margin: 3rem 0;
+}
+
+.project-card {
+  background: #1c1c1c;
+  padding: 0.9rem;
+  max-width: 30rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  text-align: left;
+  border: 1px solid var(--primary-color);
+}
+
+.project-card:hover {
+  background: #262626;
+}
+
+.project-card h3 {
+  font-size: 1.25rem;
+  margin: 0.75rem 0;
+  color: #9c6bff;
+  padding: 4px;
+  text-align: center;
+}
+
+.project-card p {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.project-card a {
+  color: #7a02fa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.card-tech {
+  font-size: 0.95rem;
+  display: flex;
+  /* arrange spans in a row */
+  flex-wrap: wrap;
+  /* allow wrapping to next line */
+  gap: 10px;
+  /* uniform spacing left, right, up, down */
+  align-items: center;
+  /* vertically center text and spans */
+}
+
+.tech {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: var(--tag-color);
+  padding: 4px 6px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.image_div {
+  border-radius: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  /* background-color: yellow; */
+}
+
+.image_div img {
+  width: 100%;
+  /* auto dile ration thik tahkbe crop hbe na , but i want crop and full width nibe */
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  /* while cropping centered will be safe */
+  border-radius: 0.75rem;
+  display: block;
+  margin: 0 auto 0;
+  transition: transform 0.5s;
+}
+
+.layer {
+  width: 100%;
+  height: 0;
+  /* initially hidden */
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  /* background-color: #fff; */
+  /* from bottom to top transition */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.35rem;
+  transition: height 0.5s;
+  text-align: center;
+}
+
+.layer a {
+  color: var(--primary-color);
+  /* border: 1px solid white;
+   */
+  text-decoration: none;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  line-height: 2.5rem;
+  /* height width centereds */
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  /* circle  */
+  text-align: center;
+  /* icon circle er center e thakbe  */
+}
+
+.layer p {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  /* dark overlay */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.image_div:hover img {
+  transform: scale(1.5);
+}
+
+.image_div:hover .layer {
+  height: 100%;
+}
+
+.pb {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1rem 0.5rem 1rem 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0.5rem 5% 0.5rem;
+    /* background-color: red; */
+  }
+
+  nav .fa-solid {
+    display: block;
+    font-size: 1.25rem;
+  }
+
+  nav ul {
+    background: var(--primary-color);
+    position: fixed;
+    /* fixed on the screen make a scroll to understand pos realted to initial block body */
+    top: 0;
+    right: 0;
+    width: 12.5rem;
+    right: -12.5rem;
+    /* better transition after using the same width */
+    height: 100vh;
+    padding-top: 3rem;
+    z-index: 2;
+    /* safety */
+    transition: right 0.3s;
+  }
+
+  nav ul li {
+    display: block;
+    /* take full width */
+    margin: 1.5rem;
+  }
+
+  nav ul .fa-solid {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+}

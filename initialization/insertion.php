@@ -106,13 +106,13 @@ $sql = "INSERT INTO tt (name) VALUES
 ('Visual Studio Code'),
 ('Android Studio IDE'),
 ('IntelliJ IDEA IDE'),
-('Logisim (Digital Logic Simulator)'),
+('Logisim'),
 ('Arduino Platform')";
 executeQuery($conn, $sql);
 
 // Insert into others (ot)
 $sql = "INSERT INTO ot (name) VALUES
-('Competitive Programming (Codeforces – Rated)'),
+('CP(Codeforces)'),
 ('Teamwork'),
 ('Leadership'),
 ('Communication'),
