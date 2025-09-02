@@ -236,7 +236,7 @@ nav ul li a:hover::after {
 }
 
 .about-col-2 .me {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   /* color: #25d366; */
 }
 
@@ -722,7 +722,7 @@ nav .fa-solid {
   }
 
   .about-col-2 .me {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 
   .sub_title {

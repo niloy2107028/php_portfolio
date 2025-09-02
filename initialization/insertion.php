@@ -32,7 +32,7 @@ echo "Clearing old data...\n";
 $sql = "SET FOREIGN_KEY_CHECKS = 0";
 executeQuery($conn, $sql);
 
-$tables = ["skills", "about", "education", "pl", "wd", "ad", "tt", "ot", "projects"];
+$tables = ["skills", "about", "education", "pl", "wd", "ad", "tt", "ot", "projects","users"];
 foreach ($tables as $table) {
     $sql = "TRUNCATE TABLE $table";
     executeQuery($conn, $sql);
@@ -59,7 +59,7 @@ $bio = "A proactive BSc in Computer Science and Engineering student at Khulna Un
 
 Passionate about problem-solving, competitive programming, and building innovative applications, I continuously strive to learn new technologies and enhance my skills. I enjoy tackling challenging programming tasks and delivering efficient, high-quality solutions. I am seeking opportunities to apply my expertise in dynamic environments that foster growth, creativity, and innovation.";
 
-$sql = "INSERT INTO about (img_url, bio) VALUES ('img1.jpg', '$bio')";
+$sql = "INSERT INTO about (img_url, bio) VALUES ('formal.jpeg', '$bio')";
 executeQuery($conn, $sql);
 
 // Insert into education
@@ -143,6 +143,14 @@ $sql = "INSERT INTO projects (p_img_link, p_title, p_des, p_tech, p_link) VALUES
 
 ";
 executeQuery($conn, $sql);
+
+
+// Insert into user table
+$hashedPassword = password_hash('1234', PASSWORD_DEFAULT);
+$sql = "INSERT INTO users (email, password) 
+        VALUES ('shoaibhasan600@gmail.com', '$hashedPassword')";
+executeQuery($conn, $sql);
+
 
 echo "✅ All sample data inserted successfully\n";
 

@@ -42,7 +42,8 @@ if ($conn->connect_error) {
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#contact">Download CV</a></li>
+          <li><a href="#contact">CV</a></li>
+          <li><a href="./User/login.php">Login</a></li>
           <i class="fa-solid fa-xmark" onclick="close_menu()"></i>
         </ul>
         <i class="fa-solid fa-bars" onclick="open_menu()"></i>
@@ -77,19 +78,25 @@ if ($conn->connect_error) {
 
 
   <!-- About section  -->
+
+  <?php
+  // Fetch about info from DB
+  $sql = "SELECT img_url, bio FROM about LIMIT 1";
+  $result = $conn->query($sql);
+  $about = $result->fetch_assoc();
+  ?>
+
+
   <div id="about">
     <div class="container">
       <div class="row">
         <div class="about-col-1">
-          <img src="images/formal.jpeg" alt="user photo" />
+          <img src="./images/<?php echo htmlspecialchars($about['img_url']); ?>" alt="user photo" />
         </div>
         <div class="about-col-2">
           <h1 class="sub_title ab">About Me</h1>
-          <?php
-          // Fetch bio from about table
-          $result = $conn->query("SELECT bio FROM about");
-          echo '<p class="me">' . htmlspecialchars($result->fetch_assoc()['bio']) . '</p>';
-          ?>
+
+          <p class="me"><?php echo htmlspecialchars($about['bio']); ?> </p>
 
 
           <div class="tab_titles">

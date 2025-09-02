@@ -49,7 +49,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE about (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     img_url VARCHAR(255) NOT NULL,
-    bio VARCHAR(255) NOT NULL
+    bio TEXT NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
     echo "about table created successfully\n";
@@ -137,6 +137,19 @@ if ($conn->query($sql) === TRUE) {
     echo "projects table created successfully\n";
 } else {
     echo "Error creating table projects: " . $conn->error;
+}
+
+// Create table users
+$sql = "CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+if ($conn->query($sql) === TRUE) {
+    echo "users table created successfully\n";
+} else {
+    echo "Error creating table users: " . $conn->error;
 }
 
 // Close connection

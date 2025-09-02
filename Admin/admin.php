@@ -36,13 +36,16 @@ if ($conn->connect_error) {
       <p><span>N</span>iloy.</p>
     </div>
     <ul id="sidemenu">
-      <li><a href="#header">Home</a></li>
+      <li><a onclick="opentab('about')" class="link active_link">About</a></li>
       <!-- id will take us to the specific section -->
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#contact">Download CV</a></li>
+      <li><a onclick="opentab('education')" class="link">Education</a></li>
+      <li><a onclick="opentab('skill')" class="link">Skills</a></li>
+
+      <li><a onclick="opentab('service')" class="link">Services</a></li>
+
+      <li><a onclick="opentab('admin-projects')" class="link">Projects</a></li>
+
+
       <i class="fa-solid fa-xmark" onclick="close_menu()"></i>
     </ul>
     <i class="fa-solid fa-bars" onclick="open_menu()"></i>
@@ -50,19 +53,27 @@ if ($conn->connect_error) {
 
   <!-- ------------about section-----------------------  -->
 
+
+  <?php
+  // Fetch about info from DB
+  $sql = "SELECT img_url, bio FROM about LIMIT 1";
+  $result = $conn->query($sql);
+  $about = $result->fetch_assoc();
+  ?>
+
   <div class="container">
-    <div class="section" id="about">
+    <div class="section active_tab" id="about">
       <h2 class="section_title">Manage About Section</h2>
 
-      <!-- Add Skill Form -->
+      <!-- About Form -->
       <div class="form-container">
-        <form>
-          <!-- Original Image -->
+        <form method="POST" action="update_about.php" enctype="multipart/form-data">
+
+          <!-- Current Image -->
           <div class="form-group">
             <p>Current Image</p>
-            <br />
             <img
-              src="../images/formal.jpeg"
+              src="../images/<?php echo htmlspecialchars($about['img_url']); ?>"
               class="image-edit-preview"
               id="old_image"
               alt="Old Image" />
@@ -84,10 +95,10 @@ if ($conn->connect_error) {
             <textarea
               id="description"
               name="description"
-              rows="4"
+              rows="8"
               class="form-input"
               placeholder="Enter skill description"
-              required></textarea>
+              required><?php echo htmlspecialchars($about['bio']); ?></textarea>
           </div>
 
           <!-- Submit -->
@@ -95,18 +106,17 @@ if ($conn->connect_error) {
         </form>
       </div>
     </div>
-  </div>
 
 
-  <!-- ------------------new skill section ------------------------   -->
+    <!-- ------------------new skill section ------------------------   -->
 
-  <?php
-  // Fetch skills from DB
-  $sql = "SELECT id, skill_name, skill_des FROM skills";
-  $skills = $conn->query($sql);
-  ?>
+    <?php
+    // Fetch skills from DB
+    $sql = "SELECT id, skill_name, skill_des FROM skills";
+    $skills = $conn->query($sql);
+    ?>
 
-  <div class="container">
+    <!-- <div class="container"> -->
     <div class="section" id="skill">
       <h2 class="section_title">Manage Skills</h2>
 
@@ -185,19 +195,19 @@ if ($conn->connect_error) {
         </form>
       </div>
     </div>
-  </div>
+    <!-- </div> -->
 
 
 
-  <!-- ------------------new Education section ------------------------   -->
+    <!-- ------------------new Education section ------------------------   -->
 
-  <?php
-  // Fetch skills from DB
-  $sql = "SELECT id, year, degree FROM education";
-  $educations = $conn->query($sql);
-  ?>
+    <?php
+    // Fetch Educations from DB
+    $sql = "SELECT id, year, degree FROM education";
+    $educations = $conn->query($sql);
+    ?>
 
-  <div class="container">
+    <!-- <div class="container"> -->
     <div class="section" id="education">
       <h2 class="section_title">Manage Education</h2>
 
@@ -251,61 +261,68 @@ if ($conn->connect_error) {
         </tbody>
       </table>
 
-      <!-- Add Skill Form -->
+      <!-- Add Education Form -->
       <div class="form-container">
-        <h3 class="form_title">Add New Skill</h3>
-        <form action="add_skill.php" method="POST">
+        <h3 class="form_title">Add New Degree</h3>
+
+
+        <form action="add_education.php" method="POST">
           <div class="form-group">
-            <label for="title">Skill Title</label>
+            <label for="year">Graduation Year</label>
             <input
-              type="text"
-              id="title"
-              name="title"
+              type="number"
+              id="year"
+              name="year"
               class="form-input"
-              placeholder="Enter skill title"
+              placeholder="Enter graduation year (e.g., 2025)"
+              min="1900"
+              max="2099"
+              step="1"
               required />
           </div>
+
+          <!-- Degree Title -->
           <div class="form-group">
-            <label for="description">Skill Description</label>
-            <textarea
-              id="description"
-              name="description"
-              rows="4"
+            <label for="degree">Academic Degree</label>
+            <input
+              type="text"
+              id="degree"
+              name="degree"
               class="form-input"
-              placeholder="Enter skill description"
-              required></textarea>
+              placeholder="Enter your degree (e.g., BSc in Computer Science)"
+              required />
           </div>
+
+
           <button type="submit" class="btn-submit">Add Skill</button>
         </form>
       </div>
     </div>
-  </div>
+    <!-- </div> -->
 
 
 
-  <!-- ----------------service section--------------- -->
+    <!-- -------------------------new service section-------------  -->
 
+    <!-- ----------------service section--------------- -->
 
-
-
-  <?php
-  // Function to fetch all rows from a table
-  function fetchRows($conn, $table)
-  {
-    $rows = [];
-    $sql = "SELECT name FROM $table";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        $rows[] = $row['name'];
+    <?php
+    // Fetch service items (with id) instead of only name
+    function fetchRows($conn, $table)
+    {
+      $rows = [];
+      $sql = "SELECT id, name FROM $table";
+      $result = $conn->query($sql);
+      if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $rows[] = $row;
+        }
       }
+      return $rows;
     }
-    return $rows;
-  }
+    ?>
 
-  ?>
-
-  <div class="container">
+    <!-- <div class="container"> -->
     <div class="section" id="service">
       <h2 class="section_title">Manage Services</h2>
       <div class="services_list">
@@ -318,61 +335,89 @@ if ($conn->connect_error) {
           "ot" => "Other Skills"
         ];
 
-        foreach ($tables as $table => $title) {
+        foreach ($tables as $table => $title):
           $items = fetchRows($conn, $table);
-          echo '<div class="service-card">';
-          echo '<h3>' . htmlspecialchars($title) . '</h3>';
-          echo '<table class="service-table">';
-          echo '<thead><tr><th>Item</th><th>Action</th></tr></thead>';
-          echo '<tbody>';
-          if (!empty($items)) {
-            foreach ($items as $item) {
-              echo '<tr>';
-              echo '<td>' . htmlspecialchars($item) . '</td>';
-              echo '<td class="service_action">
-                                    <i class="fa-solid fa-square-pen"></i>
-                                    <i class="fa-solid fa-trash"></i>
-                                  </td>';
-              echo '</tr>';
-            }
-          } else {
-            echo '<tr><td colspan="2">No items found</td></tr>';
-          }
-
-          echo '</tbody>';
-          echo '</table>';
-
-          // Add new item form row
-          echo '<form class="service_form">
-          <div class="service_group">
-            <label for="title">Add New</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              class="form-input"
-              placeholder="Enter Name"
-              required />
-          </div>
-          <button type="submit" class="service_button">Add Skill</button>
-        </form>';
-          echo '</div>';
-        }
         ?>
+          <div class="service-card">
+            <h3><?php echo htmlspecialchars($title); ?></h3>
+            <table class="service-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php if (!empty($items)): ?>
+                  <?php foreach ($items as $item): ?>
+                    <tr>
+                      <!-- Update form inside row -->
+                      <td>
+                        <form action="update_service.php" method="POST" class="table_inner_form">
+                          <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
+                          <input type="hidden" name="table" value="<?php echo $table; ?>">
+                          <input type="text" name="name"
+                            value="<?php echo htmlspecialchars($item['name']); ?>"
+                            class="table_input" required>
+                      </td>
+                      <td class="table_action">
+                        <button type="submit">
+                          <i class="fa fa-save"></i>
+                        </button>
+                        </form>
+
+                        <!-- Delete form -->
+                        <form action="delete_service.php" method="POST" style="display:inline;"
+                          onsubmit="return confirm('Are you sure you want to delete this service?');">
+                          <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
+                          <input type="hidden" name="table" value="<?php echo $table; ?>">
+                          <button type="submit">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <tr>
+                    <td colspan="2">No items found</td>
+                  </tr>
+                <?php endif; ?>
+              </tbody>
+            </table>
+
+            <!-- Add new item form row -->
+            <form action="add_service.php" method="POST" class="service_form">
+              <input type="hidden" name="table" value="<?php echo $table; ?>">
+              <div class="service_group">
+                <label for="title_<?php echo $table; ?>">Add New</label>
+                <input
+                  type="text"
+                  id="title_<?php echo $table; ?>"
+                  name="title"
+                  class="form-input"
+                  placeholder="Enter Name"
+                  required />
+              </div>
+              <button type="submit" class="service_button">Add Skill</button>
+            </form>
+          </div>
+        <?php endforeach; ?>
       </div>
-
     </div>
-  </div>
+    <!-- </div> -->
 
-  <!-- --------------------------projects-------------------------------->
 
-  <?php
-  // Fetch projects
-  $sql = "SELECT id, p_img_link, p_title, p_des, p_tech, p_link FROM projects";
-  $projects = $conn->query($sql);
-  ?>
+    <!-- ------------------new project section---------------  -->
 
-  <div class="container">
+
+    <?php
+    // Fetch projects
+    $sql = "SELECT id, p_img_link, p_title, p_des, p_tech, p_link FROM projects";
+    $projects = $conn->query($sql);
+    ?>
+
+    <!-- <div class="container"> -->
     <div class="section" id="admin-projects">
       <h2 class="section_title">Manage Projects</h2>
       <div class="work_list">
@@ -380,44 +425,102 @@ if ($conn->connect_error) {
         <?php if ($projects && $projects->num_rows > 0): ?>
           <?php while ($p = $projects->fetch_assoc()): ?>
             <div class="project-card">
-              <div class="image_div">
-                <img src="../images/<?php echo htmlspecialchars($p['p_img_link']); ?>"
-                  alt="<?php echo htmlspecialchars($p['p_title']); ?> Preview"
-                  class="project-img">
 
-                <div class="layer">
-                  <?php if (!empty($p['p_link'])): ?>
-                    <p>View Repository</p>
-                    <a href="<?php echo htmlspecialchars($p['p_link']); ?>" target="_blank">
-                      <i class="fa-solid fa-link"></i>
-                    </a>
-                  <?php endif; ?>
+              <!-- Update Project Form -->
+              <form action="update_project.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?php echo $p['id']; ?>">
+
+                <!-- Current Image -->
+                <div class="form-group">
+                  <p>Current Image</p>
+                  <br />
+                  <img
+                    src="../images/<?php echo htmlspecialchars($p['p_img_link']); ?>"
+                    class="image-edit-preview"
+                    alt="Project Image" />
                 </div>
-              </div>
 
-              <h3><?php echo htmlspecialchars($p['p_title']); ?></h3>
-              <p><?php echo htmlspecialchars($p['p_des']); ?></p>
+                <!-- Upload New Image -->
+                <div class="form-group">
+                  <label for="p_img_link_<?php echo $p['id']; ?>">Upload New Image</label>
+                  <input
+                    type="file"
+                    id="p_img_link_<?php echo $p['id']; ?>"
+                    name="p_img_link"
+                    class="form-input"
+                    accept="image/*" />
+                </div>
 
-              <p>Technologies :</p>
-              <p class="card-tech">
-                <?php
-                $techs = explode(',', $p['p_tech']);
-                foreach ($techs as $tech) {
-                  echo '<span class="tech">' . htmlspecialchars(trim($tech)) . '</span> ';
-                }
-                ?>
-              </p>
+                <!-- Project Title -->
+                <div class="form-group">
+                  <label for="p_title_<?php echo $p['id']; ?>">Project Title</label>
+                  <input
+                    type="text"
+                    id="p_title_<?php echo $p['id']; ?>"
+                    name="p_title"
+                    class="form-input"
+                    value="<?php echo htmlspecialchars($p['p_title']); ?>"
+                    required />
+                </div>
 
-              <!-- Action buttons -->
-              <div class="service_action">
-                <button class="btn-edit pb"> <i class="fa fa-edit"></i> Edit </button> <button class="btn-delete pb"> <i class="fa fa-trash"></i> Delete </button>
-              </div>
+                <!-- Description -->
+                <div class="form-group">
+                  <label for="p_des_<?php echo $p['id']; ?>">Description</label>
+                  <textarea
+                    id="p_des_<?php echo $p['id']; ?>"
+                    name="p_des"
+                    rows="7"
+                    class="form-input"
+                    required><?php echo htmlspecialchars($p['p_des']); ?></textarea>
+                </div>
 
+                <!-- Technologies -->
+                <div class="form-group">
+                  <label for="p_tech_<?php echo $p['id']; ?>">Technologies (comma separated)</label>
+                  <input
+                    type="text"
+                    id="p_tech_<?php echo $p['id']; ?>"
+                    name="p_tech"
+                    class="form-input"
+                    value="<?php echo htmlspecialchars($p['p_tech']); ?>"
+                    required />
+                </div>
+
+                <!-- Repository Link -->
+                <div class="form-group">
+                  <label for="p_link_<?php echo $p['id']; ?>">Repository Link</label>
+                  <input
+                    type="url"
+                    id="p_link_<?php echo $p['id']; ?>"
+                    name="p_link"
+                    class="form-input"
+                    value="<?php echo htmlspecialchars($p['p_link']); ?>" />
+                </div>
+
+                <!-- Actions -->
+                <div class="service_action">
+                  <button type="submit" class="btn-edit pb">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                </div>
+              </form>
+
+              <!-- Delete Form -->
+              <form action="delete_project.php" method="POST" style="display:inline;"
+                onsubmit="return confirm('Are you sure you want to delete this project?');">
+                <input type="hidden" name="id" value="<?php echo $p['id']; ?>">
+                <button type="submit" class="btn-delete pb">
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+              </form>
             </div>
+
           <?php endwhile; ?>
         <?php else: ?>
           <p>No projects found.</p>
         <?php endif; ?>
+
+
 
       </div>
 
@@ -445,21 +548,22 @@ if ($conn->connect_error) {
             <input type="url" id="p_link" name="p_link" class="form-input" placeholder="https://github.com/..." />
           </div>
 
-          <div class="service_group">
+          <div class="form-group">
             <label for="p_img_link">Upload Image</label>
             <input type="file" id="p_img_link" name="p_img_link" class="form-input" accept="image/*" required />
           </div>
 
           <button type="submit" class="btn-submit">Add Project</button>
         </form>
-
       </div>
-
     </div>
+
+
+
   </div>
 
 
-
+  <script src="admin.js"></script>
 </body>
 
 </html>
