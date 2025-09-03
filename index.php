@@ -343,17 +343,10 @@ if (isset($_SESSION['user_id'])) {
           <a href="images/cv.pdf" download class="btn btn_more cv">Download CV</a>
         </div>
         <div class="contact-right">
-          <form action="#">
+          <form action="send_mail.php" method="POST">
             <input type="text" name="name" placeholder="Your Name" required />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required />
-            <textarea
-              name="message"
-              rows="6"
-              placeholder="Your Message"></textarea>
+            <input type="email" name="email" placeholder="Your Email" required />
+            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
             <button type="submit" class="btn btn_more">Submit</button>
           </form>
         </div>
