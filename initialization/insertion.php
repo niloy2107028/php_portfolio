@@ -32,7 +32,7 @@ echo "Clearing old data...\n";
 $sql = "SET FOREIGN_KEY_CHECKS = 0";
 executeQuery($conn, $sql);
 
-$tables = ["skills", "about", "education", "pl", "wd", "ad", "tt", "ot", "projects","users"];
+$tables = ["skills", "about", "education", "pl", "wd", "ad", "tt", "ot", "projects", "users"];
 foreach ($tables as $table) {
     $sql = "TRUNCATE TABLE $table";
     executeQuery($conn, $sql);
@@ -147,8 +147,10 @@ executeQuery($conn, $sql);
 
 // Insert into user table
 $hashedPassword = password_hash('1234', PASSWORD_DEFAULT);
-$sql = "INSERT INTO users (email, password) 
-        VALUES ('shoaibhasan600@gmail.com', '$hashedPassword')";
+
+$sql = "INSERT INTO users (email, password, remember_token) 
+        VALUES ('shoaibhasan600@gmail.com', '$hashedPassword', NULL)";
+
 executeQuery($conn, $sql);
 
 

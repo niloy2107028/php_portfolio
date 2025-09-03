@@ -1,5 +1,6 @@
 <?php
 // update_education.php
+include 'authorization.php';
 include '../config/db.php'; // same as update_about.php, adjust path if needed
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

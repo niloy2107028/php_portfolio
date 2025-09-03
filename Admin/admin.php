@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+
 // db_connect.php (or at the top of your HTML file)
 $servername = "localhost";
 $username = "root";
@@ -9,6 +12,41 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
+
+// ✅ Authorization check
+if (!isset($_SESSION['user_id'])) {
+  if (isset($_COOKIE['remember_token'])) {
+    list($userId, $token) = explode(':', $_COOKIE['remember_token']);
+
+    $stmt = $conn->prepare("SELECT id, email, remember_token FROM users WHERE id=? LIMIT 1");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $result->num_rows === 1) {
+      $user = $result->fetch_assoc();
+
+      if (password_verify($token, $user['remember_token'])) {
+        // Restore session
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_email'] = $user['email'];
+      } else {
+        header("Location: ../User/login.php?status=error&msg=unauthorized");
+        exit();
+      }
+    } else {
+      header("Location: ../User/login.php?status=error&msg=unauthorized");
+      exit();
+    }
+  } else {
+    header("Location: ../User/login.php?status=error&msg=unauthorized");
+    exit();
+  }
+}
+
+
+
+
 ?>
 
 
@@ -44,6 +82,16 @@ if ($conn->connect_error) {
       <li><a onclick="opentab('service')" class="link">Services</a></li>
 
       <li><a onclick="opentab('admin-projects')" class="link">Projects</a></li>
+
+
+      <li>
+        <a href="../User/logout.php"
+          onclick="return confirm('Are you sure you want to logout?');">
+          Logout
+        </a>
+
+      </li>
+
 
 
       <i class="fa-solid fa-xmark" onclick="close_menu()"></i>
@@ -407,7 +455,6 @@ if ($conn->connect_error) {
         <?php endforeach; ?>
       </div>
     </div>
-    <!-- </div> -->
 
 
     <!-- ------------------new project section---------------  -->

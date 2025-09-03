@@ -1,5 +1,7 @@
 <?php
 // update_skill.php
+include 'authorization.php';
+
 include '../config/db.php'; // adjust path if needed
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

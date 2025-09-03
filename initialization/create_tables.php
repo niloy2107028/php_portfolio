@@ -144,6 +144,7 @@ $sql = "CREATE TABLE users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    remember_token VARCHAR(255) DEFAULT NULL, -- store hashed remember token
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 if ($conn->query($sql) === TRUE) {
@@ -151,6 +152,7 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating table users: " . $conn->error;
 }
+
 
 // Close connection
 $conn->close();

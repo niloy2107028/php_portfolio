@@ -1,5 +1,7 @@
 <?php
 // update_about.php
+include 'authorization.php';
+
 include '../config/db.php'; // The path to your database connection file.
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

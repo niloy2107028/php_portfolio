@@ -1,4 +1,8 @@
 <?php
+session_start();
+//otherwise session wil not work
+
+
 // db_connect.php (or at the top of your HTML file)
 $servername = "localhost";
 $username = "root";
@@ -9,6 +13,32 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
+
+//  Check login status
+$loggedIn = false;
+
+if (isset($_SESSION['user_id'])) {
+  $loggedIn = true;
+} elseif (isset($_COOKIE['remember_token'])) {
+  list($userId, $token) = explode(':', $_COOKIE['remember_token']);
+
+  $stmt = $conn->prepare("SELECT id, email, remember_token FROM users WHERE id=? LIMIT 1");
+  $stmt->bind_param("i", $userId);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result && $result->num_rows === 1) {
+    $user = $result->fetch_assoc();
+
+    if (password_verify($token, $user['remember_token'])) {
+      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['user_email'] = $user['email'];
+      $loggedIn = true;
+    }
+  }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +73,18 @@ if ($conn->connect_error) {
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#contact">CV</a></li>
-          <li><a href="./User/login.php">Login</a></li>
+
+          <?php if ($loggedIn): ?>
+            <li><a href="./Admin/admin.php">Admin</a></li>
+            <li> <a href="../User/logout.php"
+                onclick="return confirm('Are you sure you want to logout?');">
+                Logout
+              </a></li>
+          <?php else: ?>
+            <li><a href="./User/login.php">Login</a></li>
+          <?php endif; ?>
+
+
           <i class="fa-solid fa-xmark" onclick="close_menu()"></i>
         </ul>
         <i class="fa-solid fa-bars" onclick="open_menu()"></i>

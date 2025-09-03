@@ -1,5 +1,7 @@
 <?php
 // update_project.php
+include 'authorization.php';
+
 include '../config/db.php'; // adjust path if needed
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
