@@ -149,13 +149,15 @@ if ($conn->connect_error) {
                   </button>
                   </form>
 
-                  <form action="delete_skill.php" method="POST" style="display:inline;"
+
+                  <!-- REMEMBER ? DELETE WILL CAUSE ERROR IN TYPE WRITING EFFECT -->
+                  <!-- <form action="delete_skill.php" method="POST" style="display:inline;"
                     onsubmit="return confirm('Are you sure you want to delete this skill?');">
                     <input type="hidden" name="id" value="<?php echo $s['id']; ?>">
                     <button type="submit" class="btn-delete">
                       <i class="fa fa-trash"></i> Delete
                     </button>
-                  </form>
+                  </form> -->
                 </td>
               </tr>
             <?php endwhile; ?>
@@ -167,8 +169,10 @@ if ($conn->connect_error) {
         </tbody>
       </table>
 
+
+      <!-- REMEMBER ? ADD WILL CAUSE ERROR IN TYPE WRITING EFFECT -->
       <!-- Add Skill Form -->
-      <div class="form-container">
+      <!-- <div class="form-container">
         <h3 class="form_title">Add New Skill</h3>
         <form action="add_skill.php" method="POST">
           <div class="form-group">
@@ -193,7 +197,7 @@ if ($conn->connect_error) {
           </div>
           <button type="submit" class="btn-submit">Add Skill</button>
         </form>
-      </div>
+      </div> -->
     </div>
 
 
