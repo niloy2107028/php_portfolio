@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ssi", $year, $degree, $id);
 
         if ($stmt->execute()) {
-            header("Location: admin.php?tab=education&status=success");
+            header("Location: admin.php");
             exit();
         } else {
             header("Location: admin.php?tab=education&status=error&msg=db_failed");
