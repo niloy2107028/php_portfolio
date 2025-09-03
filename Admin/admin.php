@@ -195,7 +195,6 @@ if ($conn->connect_error) {
         </form>
       </div>
     </div>
-    <!-- </div> -->
 
 
 
@@ -243,7 +242,7 @@ if ($conn->connect_error) {
                   </button>
                   </form>
 
-                  <form action="delete_skill.php" method="POST" style="display:inline;"
+                  <form action="delete_education.php" method="POST" style="display:inline;"
                     onsubmit="return confirm('Are you sure you want to delete this degree?');">
                     <input type="hidden" name="id" value="<?php echo $s['id']; ?>">
                     <button type="submit" class="btn-delete">
@@ -298,7 +297,6 @@ if ($conn->connect_error) {
         </form>
       </div>
     </div>
-    <!-- </div> -->
 
 
 
