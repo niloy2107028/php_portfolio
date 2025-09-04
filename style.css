@@ -639,6 +639,32 @@ form .btn.btn_more {
   color: var(--primary-color);
 }
 
+/* Scroll To Top Button */
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: none; /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(142, 45, 226, 0.6);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 999;
+}
+
+#scrollToTopBtn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(142, 45, 226, 0.8);
+}
+
 /* -----------------css for small screen --------------- */
 
 nav .fa-solid {

@@ -360,6 +360,11 @@ if (isset($_SESSION['user_id'])) {
     </div>
   </div>
 
+  <!-- Scroll to Top Button -->
+<button id="scrollToTopBtn">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
   <script src="index.js"></script>
 </body>
 

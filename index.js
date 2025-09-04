@@ -21,3 +21,22 @@ function open_menu() {
 function close_menu() {
   sidemenu.style.right = "-12.5rem";
 }
+
+// Scroll To Top Button
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > header.offsetHeight - 50) {
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+});
+
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
