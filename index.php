@@ -41,6 +41,12 @@ if (isset($_SESSION['user_id'])) {
 
 ?>
 
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,6 +61,7 @@ if (isset($_SESSION['user_id'])) {
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="flash.css" />
 
 </head>
 
@@ -76,7 +83,7 @@ if (isset($_SESSION['user_id'])) {
 
           <?php if ($loggedIn): ?>
             <li><a href="./Admin/admin.php">Admin</a></li>
-            <li> <a href="../User/logout.php"
+            <li> <a href="./User/logout.php"
                 onclick="return confirm('Are you sure you want to logout?');">
                 Logout
               </a></li>
@@ -361,11 +368,58 @@ if (isset($_SESSION['user_id'])) {
   </div>
 
   <!-- Scroll to Top Button -->
-<button id="scrollToTopBtn">
-  <i class="fa-solid fa-arrow-up"></i>
-</button>
+  <button id="scrollToTopBtn">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+
+
+
+
+
+  <?php
+  // Flash message handler
+  $status = $_GET['status'] ?? null;
+  $msg = $_GET['msg'] ?? null;
+
+  if ($status) {
+    $messageText = '';
+    $messageType = '';
+
+    // Map status to messages
+    switch ($status) {
+      case 'success':
+        $messageText = $msg ? ucfirst(str_replace("_", " ", $msg)) : "Operation successful!";
+        $messageType = 'success';
+        break;
+
+      case 'error':
+        $messageText = $msg ? ucfirst(str_replace("_", " ", $msg)) : "Something went wrong!";
+        $messageType = 'error';
+        break;
+
+      case 'logged_out':
+        $messageText = "You have logged out successfully.";
+        $messageType = 'error';
+        break;
+
+      default:
+        $messageText = ucfirst($status);
+        $messageType = 'success';
+        break;
+    }
+  }
+  ?>
+
+  <?php if (!empty($messageText)): ?>
+    <div id="flash-message" class="flash-toast <?= $messageType ?>">
+      <?= htmlspecialchars($messageText) ?>
+      <div class="flash-bar"></div>
+    </div>
+  <?php endif; ?>
 
   <script src="index.js"></script>
+  <script src="flash.js"></script>
 </body>
 
 </html>

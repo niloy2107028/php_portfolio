@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 setcookie("remember_token", $user['id'] . ':' . $token, time() + (86400 * 30), "/", "", true, true);
             }
 
-            header("Location: ../Admin/admin.php?tab=dashboard&status=success");
+            header("Location: ../Admin/admin.php?tab=dashboard&status=login_success");
             exit();
         } else {
             header("Location: login.php?status=error&msg=invalid_password");

@@ -65,6 +65,7 @@ if (!isset($_SESSION['user_id'])) {
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="../flash.css" />
 
 </head>
 
@@ -612,7 +613,58 @@ if (!isset($_SESSION['user_id'])) {
   </div>
 
 
+
+  <?php
+  // Flash message handler
+  $status = $_GET['status'] ?? null;
+  $msg = $_GET['msg'] ?? null;
+
+  if ($status) {
+    $messageText = '';
+    $messageType = '';
+
+    // Map status to messages
+    switch ($status) {
+      case 'success':
+        $messageText = $msg ? ucfirst(str_replace("_", " ", $msg)) : "Operation successful!";
+        $messageType = 'success';
+        break;
+
+      case 'error':
+        $messageText = $msg ? ucfirst(str_replace("_", " ", $msg)) : "Something went wrong!";
+        $messageType = 'error';
+        break;
+
+      case 'logged_out':
+        $messageText = "You have logged out successfully.";
+        $messageType = 'error';
+        break;
+
+      case 'login_success':
+        $messageText = "You have logged in successfully.";
+        $messageType = 'success';
+        break;
+
+
+
+      default:
+        $messageText = ucfirst($status);
+        $messageType = 'success';
+        break;
+    }
+  }
+  ?>
+
+  <?php if (!empty($messageText)): ?>
+    <div id="flash-message" class="flash-toast <?= $messageType ?>">
+      <?= htmlspecialchars($messageText) ?>
+      <div class="flash-bar"></div>
+    </div>
+  <?php endif; ?>
+
+
   <script src="admin.js"></script>
+  <script src="../flash.js"></script>
 </body>
 
 </html>
