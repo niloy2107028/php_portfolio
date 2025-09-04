@@ -7,6 +7,7 @@
     <title>Login</title>
 
     <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="../flash.css" />
 </head>
 
 <body>
@@ -36,6 +37,62 @@
             <button type="submit" class="btn btn-login">Log In</button>
         </form>
     </div>
+
+
+
+    <?php
+    // Flash message handler
+    $status = $_GET['status'] ?? null;
+    $msg = $_GET['msg'] ?? null;
+
+    if ($status) {
+        $messageText = '';
+        $messageType = '';
+
+        switch ($status) {
+            case 'success':
+                $messageText = $msg ? ucfirst(str_replace("_", " ", $msg)) : "Operation successful!";
+                $messageType = 'success';
+                break;
+
+            case 'error':
+                // Customize error messages
+                if ($msg === "invalid_password") {
+                    $messageText = "Invalid password. Please try again.";
+                } elseif ($msg === "user_not_found") {
+                    $messageText = "User not found. Please check your email.";
+                } else {
+                    $messageText = $msg ? ucfirst(str_replace("_", " ", $msg)) : "Something went wrong!";
+                }
+                $messageType = 'error';
+                break;
+
+            case 'logged_out':
+                $messageText = "You have logged out successfully.";
+                $messageType = 'success';
+                break;
+
+            case 'login_success':
+                $messageText = "You have logged in successfully.";
+                $messageType = 'success';
+                break;
+
+            default:
+                $messageText = ucfirst(str_replace("_", " ", $status));
+                $messageType = 'success';
+                break;
+        }
+    }
+    ?>
+
+    <?php if (!empty($messageText)): ?>
+        <div id="flash-message" class="flash-toast <?= $messageType ?>">
+            <?= htmlspecialchars($messageText) ?>
+            <div class="flash-bar"></div>
+        </div>
+    <?php endif; ?>
+
+  <script src="../flash.js"></script>
 </body>
 
 </html>
