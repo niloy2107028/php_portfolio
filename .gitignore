@@ -1,0 +1,9 @@
+# Ignore send_mail.php
+send_mail.php
+
+# Ignore environment files
+.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
